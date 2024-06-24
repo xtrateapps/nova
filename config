@@ -1,11 +1,25 @@
+// const config = {
+//   db: {
+//     /* don't expose password or any sensitive info, done only for demo */
+//     host: "localhost",
+//     user: "root",
+//     password: "",
+//     database: "kdcentral",
+//     connectTimeout: 60000
+//   },
+//   listPerPage: 10,
+// };
+// module.exports = config;
+
 const config = {
   db: {
     /* don't expose password or any sensitive info, done only for demo */
-    host: "localhost",
+    host: "dpg-cpt05rbv2p9s73avb9ng-a",
     user: "root",
-    password: "",
+    password: "75yJxE9yOiCWca5mJkv0RrmAkQPQGfqs",
     database: "kdcentral",
-    connectTimeout: 60000
+    connectTimeout: 60000,
+    port: 5432
   },
   listPerPage: 10,
 };

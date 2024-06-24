@@ -24,14 +24,14 @@ router.get('/tx/getAll', async function(req, res) {
     try {
       res.json(await transactions.getMultiple(req.body));   
     } catch (err) {
-      console.error(`Error while creating programming language`, err.message);
+      console.error(`Error while creating hhhhhhh language`, err.message);
     }
 });
 
 //   ------------------------------------------------------------------------------  // 
 // Usuarios + Creacion de Wallets - Recargas de Wallet
 // Lista de Transacciones 
-router.post('/register/new-user', async (req, res, next) => {
+router.post('/register/new-user', async (req, res) => {
     // const newUserData = new userModel({
     //     name: req.body.name,
     //     author: req.body.author,
