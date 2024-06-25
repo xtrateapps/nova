@@ -42,20 +42,21 @@ async function loginUser(user) {
     //   ('${user.email}','${user.password}'}')`
     // );
     const result = await db.query(
-      `SELECT name, password * FROM users`
+      "SELECT * FROM users"
     );
-    const data = helper.emptyOrRows(result);
+
+    // const data = helper.emptyOrRows(result);
   
     
   
     let message = 'Usuario no registrado';
   
-    if (result.affectedRows) {
+    if (result) {
       message = 'Inicio de Sesion Exitoso';
     }
   
     return {
-      data,
+      result,
       message,
       meta
     }
