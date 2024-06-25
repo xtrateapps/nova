@@ -41,7 +41,7 @@ async function loginUser(user) {
       `SELECT 1 FROM users WHERE email = '${user.email}'`
     );
     let message = 'Usuario no registrado';
-    if (result.affectedRows) {
+    if (result.length > 0) {
       message = 'Inicio de Sesion Exitoso';
     }
     console.log(result, message)
