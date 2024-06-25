@@ -57,9 +57,9 @@ async function loginUser(user) {
   
     return {
       result,
-      message,
-      meta
+      message
     }
+    console.log(result, message)
   }
 
 
