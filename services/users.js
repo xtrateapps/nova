@@ -37,18 +37,11 @@ async function registerNewUsers(user) {
 }
 
 async function loginUser(user) {
-    // const result = await db.query(
-    //   `SELECT FROM users (email, password) WHERE 
-    //   ('${user.email}','${user.password}'}')`
-    // );
     const result = await db.query(
-      "SELECT * FROM users"
+      `SELECT 1 FROM users WHERE name = '${user.email}', password = '${user.password}'`
     );
 
     // const data = helper.emptyOrRows(result);
-  
-    
-  
     let message = 'Usuario no registrado';
   
     if (result) {
@@ -59,11 +52,7 @@ async function loginUser(user) {
       result,
       message
     }
-    
   }
-
-
-
 module.exports = {
     getMultiple,
     registerNewUsers,
