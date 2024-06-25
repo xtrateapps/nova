@@ -37,10 +37,8 @@ async function registerNewUsers(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT FROM users 
-      (email, password) 
-      WHERE 
-      ('${user.email}', '${user.password}'}')`
+      `SELECT FROM users (email, password) WHERE 
+      ('${user.email}','${user.password}'}')`
     );
   
     let message = 'Error in registering new transaction';
