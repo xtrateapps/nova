@@ -40,13 +40,8 @@ async function loginUser(user) {
     const result = await db.query(
       `SELECT 1 FROM users WHERE email = '${user.email}'`
     );
-    
-
-    
-  
     let message = 'Usuario no registrado';
-  
-    if (result) {
+    if (result,affectedRows) {
       message = 'Inicio de Sesion Exitoso';
     }
     console.log(result, message)
