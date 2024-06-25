@@ -41,18 +41,24 @@ async function loginUser(user) {
     //   `SELECT FROM users (email, password) WHERE 
     //   ('${user.email}','${user.password}'}')`
     // );
-
     const result = await db.query(
-      `SELECT * FROM users`
+      `SELECT name, password * FROM users`
     );
+    const data = helper.emptyOrRows(result);
   
-    let message = 'Error in registering new transaction';
+    
+  
+    let message = 'Usuario no registrado';
   
     if (result.affectedRows) {
-      message = 'Transaction registered successfully';
+      message = 'Inicio de Sesion Exitoso';
     }
   
-    return {message};
+    return {
+      data,
+      message,
+      meta
+    }
   }
 
 
