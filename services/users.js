@@ -38,7 +38,7 @@ async function registerNewUsers(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT * FROM users`
+      `SELECT * FROM users WHERE name = 'mleonmeister@gmail.com'`
     );
     
 
