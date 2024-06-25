@@ -48,6 +48,23 @@ router.post('/register/new-user', async (req, res) => {
     }
 
 })
+router.post('/login', async (req, res) => {
+    // const newUserData = new userModel({
+    //     name: req.body.name,
+    //     author: req.body.author,
+    //     username: req.body.username,
+    //     bio: req.body.bio,
+    //     wallet: Math.floor(Math.random() * 10000000888888888800),
+    //     created_at: req.body.created_at,
+    //     updated_at: req.body.updated_at
+    // })
+    try {
+        res.json(await users.loginUser(req.body));
+    } catch (err) {
+        console.error(`Error while creating transacction language`, err.message);
+    }
+
+})
 //  ------------------------------------------------------------------------------- //
 
 
