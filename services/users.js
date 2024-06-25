@@ -42,7 +42,7 @@ async function loginUser(user) {
     //   ('${user.email}','${user.password}'}')`
     // );
     const result = await db.query(
-      `SELECT 1 FROM users (email, password) WHERE email = '${user.email}' , password = '${user.password}')`
+      "SELECT * FROM users"
     );
 
     // const data = helper.emptyOrRows(result);
@@ -54,12 +54,12 @@ async function loginUser(user) {
     if (result) {
       message = 'Inicio de Sesion Exitoso';
     }
-
     console.log(result, message)
     return {
       result,
       message
     }
+    
   }
 
 
