@@ -42,7 +42,7 @@ async function loginUser(user) {
     //   ('${user.email}','${user.password}'}')`
     // );
     const result = await db.query(
-      "SELECT * FROM users"
+      `SELECT 1 FROM users (email, password) WHERE ('${user.email}', '${user.passwor}}')`
     );
 
     // const data = helper.emptyOrRows(result);
