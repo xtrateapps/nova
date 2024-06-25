@@ -38,7 +38,7 @@ async function registerNewUsers(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT 1 FROM users WHERE name = ${user.email} AND password = ${user.password}`
+      `SELECT FROM users WHERE email = '${user.email}' AND password = '${user.password}'`
     );
 
     // const data = helper.emptyOrRows(result);
