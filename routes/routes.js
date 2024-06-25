@@ -48,6 +48,7 @@ router.post('/register/new-user', async (req, res) => {
     }
 
 })
+
 router.post('/login', async (req, res) => {
     // const newUserData = new userModel({
     //     name: req.body.name,
@@ -61,7 +62,7 @@ router.post('/login', async (req, res) => {
     try {
         res.json(await users.loginUser(req.body));
     } catch (err) {
-        console.error(`Error while creating transacction language`, err.message);
+        console.error(`Error al iniciar sesion`, err.message);
     }
 
 })
