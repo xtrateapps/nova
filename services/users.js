@@ -38,10 +38,14 @@ async function registerNewUsers(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT FROM users WHERE email = '${user.email}' AND password = '${user.password}'`
+      `SELECT FROM users WHERE name = '${user.email}'`
     );
+    
 
     // const data = helper.emptyOrRows(result);
+  
+    
+  
     let message = 'Usuario no registrado';
   
     if (result) {
@@ -52,7 +56,11 @@ async function loginUser(user) {
       result,
       message
     }
+    
   }
+
+
+
 module.exports = {
     getMultiple,
     registerNewUsers,
