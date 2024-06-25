@@ -54,6 +54,7 @@ async function loginUser(user) {
     if (result) {
       message = 'Inicio de Sesion Exitoso';
     }
+
     console.log(result, message)
     return {
       result,
