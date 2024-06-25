@@ -25,13 +25,14 @@ async function registerNewUsers(user) {
     ('${user.name}', '${user.email}', '${user.email_verified_at}', '${user.password}', '${user.remember_token}}')`
   );
 
-  let message = 'Error in registering new transaction';
-
+  let message = 'Error in registering new user';
+  let code = 1;
   if (result.affectedRows) {
     message = 'Transaction registered successfully';
+    code = 0;
   }
 
-  return {message};
+  return {message,code};
 }
 
 async function loginUser(user) {
