@@ -38,16 +38,19 @@ async function registerNewUsers(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT 1 FROM users WHERE email = '${user.email}'`
+      `SELECT 1 FROM users WHERE email = '${user.email}' AND clave = '${user.password}'` 
     );
     let message = 'Usuario no registrado';
+    let code = 1
     if (result.length > 0) {
       message = 'Inicio de Sesion Exitoso';
+      code = 0
     }
     console.log(result, message)
     return {
       result,
-      message
+      message,
+      code
     }
     
   }
