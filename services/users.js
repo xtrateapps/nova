@@ -38,7 +38,7 @@ async function registerNewUsers(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT 1 FROM users WHERE email = '${user.email}' AND clave = '${user.password}'` 
+      `SELECT 1 FROM users WHERE email = '${user.email}' AND password = '${user.password}'` 
     );
     let message = 'Usuario no registrado';
     let code = 1
