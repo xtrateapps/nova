@@ -40,18 +40,24 @@ async function getUserByEmail(user) {
   const result = await db.query(
     `SELECT * FROM users WHERE email = '${user.email}' LIMIT 1` 
   );
+
   let message = 'Datos no encontrados';
+
   let code = 1
+
   if (result.length > 0) {
     message = 'Datos de usuario';
     code = 0
+    result = result[0];
   }
+
   console.log(result, message)
   return {
     result,
     message,
     code
   }
+
 }
 
 async function loginUser(user) {
