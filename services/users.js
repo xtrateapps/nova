@@ -37,7 +37,7 @@ async function registerNewUsers(user) {
 }
 
 async function getUserByEmail(user) {
-  const result = await db.query(
+  let result = await db.query(
     `SELECT * FROM users WHERE email = '${user.email}' LIMIT 1` 
   );
 
