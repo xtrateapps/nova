@@ -36,6 +36,24 @@ async function registerNewUsers(user) {
   console.log(message,code)
 }
 
+async function getUserByEmail(user) {
+  const result = await db.query(
+    `SELECT 1 FROM users WHERE email = '${user.email}'` 
+  );
+  let message = 'Datos no encontrados';
+  let code = 1
+  if (result.length > 0) {
+    message = 'Datos de usuario';
+    code = 0
+  }
+  console.log(result, message)
+  return {
+    result,
+    message,
+    code
+  }
+}
+
 async function loginUser(user) {
     const result = await db.query(
       `SELECT 1 FROM users WHERE email = '${user.email}' AND password = '${user.password}'` 
@@ -52,7 +70,6 @@ async function loginUser(user) {
       message,
       code
     }
-    
   }
 
 
@@ -60,5 +77,6 @@ async function loginUser(user) {
 module.exports = {
     getMultiple,
     registerNewUsers,
-    loginUser
+    loginUser,
+    getUserByEmail
 }

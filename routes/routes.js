@@ -29,6 +29,29 @@ router.get('/tx/getAll', async function(req, res) {
     }
 });
 
+router.get('/user/data', async function(req, res) {
+    try {
+        res.json(await users.getUserByEmail(req.body));   
+    } catch (err) {
+        console.error(`Error while geting user`, err.message);
+    }  
+});
+
+// router.get('/user/data', async function(req, res) {
+//     try {
+//         res.json(await users.getUserByEmail(req.body));   
+//     } catch (err) {
+//         console.error(`Error while geting user`, err.message);
+//     }  
+// });
+
+// router.get('/user/data', async function(req, res) {
+//     try {
+//         res.json(await users.getUserByEmail(req.body));   
+//     } catch (err) {
+//         console.error(`Error while geting user`, err.message);
+//     }  
+// });
 
 // -------------------------------------------------------------------------------- //
 
@@ -95,6 +118,11 @@ router.get('/usersList', function(req, res) {
     var allUser = userModel.find()
     res.status(200).json(allUser);  
 });
+
+
+
+
+
 
 const mangaModel = require('../model/manga.js');
 const gameModel = require('../model/game.js');
