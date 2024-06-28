@@ -5,6 +5,7 @@ const router = express.Router();
 // Enviar Transaccion
 // ----------------- Servicios ---------------------------------
 const transactions = require('../services/transactions');
+const recharges = require('../services/recharges');
 const users =  require('../services/users');
 // ----------------- Modelos -----------------------------------
 const transactionModel = require('../model/transactions');
@@ -28,7 +29,18 @@ router.get('/tx/getAll', async function(req, res) {
     }
 });
 
-//   ------------------------------------------------------------------------------  // 
+
+// -------------------------------------------------------------------------------- //
+
+router.post('/rx/getByReference', async function(req, res) {
+    try {
+      res.json(await recharges.getMultiple(req.body));   
+    } catch (err) {
+      console.error(`Error while registering a new recharge operation`, err.message);
+    }
+});
+
+//   -----------------------------------------------------------------------------  // 
 // Usuarios + Creacion de Wallets - Recargas de Wallet
 // Lista de Transacciones 
 router.post('/register/new-user', async (req, res) => {
