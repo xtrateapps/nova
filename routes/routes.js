@@ -34,7 +34,7 @@ router.post('/user/data', async function(req, res) {
         res.json(await users.getUserByEmail(req.body));   
     } catch (err) {
         console.error(`Error while geting user`, err.message);
-    }  
+    }
 });
 
 // router.get('/user/data', async function(req, res) {

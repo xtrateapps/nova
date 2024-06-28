@@ -38,7 +38,7 @@ async function registerNewUsers(user) {
 
 async function getUserByEmail(user) {
   const result = await db.query(
-    `SELECT 1 FROM users WHERE email = '${user.email}'` 
+    `SELECT * FROM users WHERE email = '${user.email}'` 
   );
   let message = 'Datos no encontrados';
   let code = 1
