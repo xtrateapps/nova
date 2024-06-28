@@ -20,9 +20,9 @@ async function getMultiple(page = 1){
 async function registerNewUsers(user) {
   const result = await db.query(
     `INSERT INTO users 
-    (name, username, email, email_verified_at, password, remember_token) 
+    (name, username, email, email_verified_at, password, saldo, remember_token) 
     VALUES 
-    ('${user.name}', '${user.username}', '${user.email}', '${user.email_verified_at}', '${user.password}', '${user.remember_token}}')`
+    ('${user.name}', '${user.username}', '${user.email}', '${user.email_verified_at}', '${user.password}', '${user.saldo}', '${user.remember_token}}')`
   );
 
   let message = 'Error in registering new user';
