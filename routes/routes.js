@@ -29,7 +29,7 @@ router.get('/tx/getAll', async function(req, res) {
     }
 });
 
-router.get('/user/data', async function(req, res) {
+router.post('/user/data', async function(req, res) {
     try {
         res.json(await users.getUserByEmail(req.body));   
     } catch (err) {
