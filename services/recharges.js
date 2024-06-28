@@ -33,6 +33,23 @@ async function registerNewRecharge(recharges) {
   return {message};
 }
 
+async function registerNewRecharge(recharges) {
+    const result = await db.query(
+      `INSERT INTO recharges 
+      (reference, bank, cedula, phone) 
+      VALUES 
+      ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}')`
+    );
+  
+    let message = 'Error in registering new transaction';
+  
+    if (result.affectedRows) {
+      message = 'Transaction registered successfully';
+    }
+  
+    return {message};
+  }
+
 module.exports = {
   getMultiple,
   registerNewRecharge

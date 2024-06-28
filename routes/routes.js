@@ -32,9 +32,17 @@ router.get('/tx/getAll', async function(req, res) {
 
 // -------------------------------------------------------------------------------- //
 
-router.post('/rx/getByReference', async function(req, res) {
+router.get('/rx/getByReference', async function(req, res) {
     try {
       res.json(await recharges.getMultiple(req.body));   
+    } catch (err) {
+      console.error(`Error while registering a new recharge operation`, err.message);
+    }
+});
+
+router.post('/rx/registerNewReference', async function(req, res) {
+    try {
+      res.json(await recharges.registerNewReference(req.body));   
     } catch (err) {
       console.error(`Error while registering a new recharge operation`, err.message);
     }
