@@ -20,6 +20,15 @@ router.post('/tx/new', async function(req, res) {
       console.error(`Error while creating transacction language`, err.message);
     }
 });
+// -----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 router.get('/tx/getAll', async function(req, res) {
     try {
@@ -28,6 +37,40 @@ router.get('/tx/getAll', async function(req, res) {
       console.error(`Error while creating hhhhhhh language`, err.message);
     }
 });
+
+router.post('/tx/sendFunds', async function(req, res) {
+    try {
+      res.json(await transactions.sendFunds(req.body));   
+    } catch (err) {
+      console.error(`Error sending funds`, err.message);
+    }
+});
+
+
+router.post('/user/data', async function(req, res) {
+    try {
+        res.json(await users.getUserByEmail(req.body));   
+    } catch (err) {
+        console.error(`Error while geting user`, err.message);
+    }
+});
+
+router.post('/user/data', async function(req, res) {
+    try {
+        res.json(await users.getUserByEmail(req.body));   
+    } catch (err) {
+        console.error(`Error while geting user`, err.message);
+    }
+});
+
+router.post('/user/data', async function(req, res) {
+    try {
+        res.json(await users.getUserByEmail(req.body));   
+    } catch (err) {
+        console.error(`Error while geting user`, err.message);
+    }
+});
+
 
 router.post('/user/data', async function(req, res) {
     try {

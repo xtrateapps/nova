@@ -16,7 +16,7 @@ async function getMultiple(page = 1){
   }
 }
 
-async function registerNewTransaction(transaction) {
+async function  registerNewTransaction(transaction) {
   const result = await db.query(
     `INSERT INTO transactions 
     (reference, date, payment_number, bank, account_number, amount) 
