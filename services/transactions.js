@@ -28,6 +28,26 @@ async function  registerNewTransaction(transaction) {
 
   if (result.affectedRows) {
     message = 'Transaction registered successfully';
+    addNewFundsAterRegisteringNewTransaction({
+      "reference": "",
+      "date": "",
+      "payment_number": "",
+      "bank": "",
+      "account_number": "",
+      "amount": "",
+    })
+  }
+
+  return {message};
+}
+
+async function  addNewFundsAterRegisteringNewTransaction(transaction) {
+  const result = await db.query("SELECT * , (SELECT sum(saldo)  FROM users WHERE email = 'vmorenozx@gmail.com') as `items_total` FROM transactions WHERE account_number = '')");
+
+  let message = 'Error in registering new transaction';
+
+  if (result.affectedRows) {
+    message = 'Transaction registered successfully';
   }
 
   return {message};
