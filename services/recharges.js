@@ -33,6 +33,21 @@ async function registerNewRecharge(recharges) {
   return {message};
 }
 
+async function approveRecharge(recharges) {
+  const result = await db.query(
+    `SELECT * FROM recharges 
+    WHERE reference =  '${recharges.reference}'`
+  );
+
+  let message = 'Error approving recharge';
+
+  if (result.affectedRows) {
+    message = 'Recharge approved successfully';
+  }
+
+  return {message};
+}
+
 async function registerNewRecharge(recharges) {
     const result = await db.query(
       `INSERT INTO recharges 
@@ -52,5 +67,6 @@ async function registerNewRecharge(recharges) {
 
 module.exports = {
   getMultiple,
-  registerNewRecharge
+  registerNewRecharge,
+  approveRecharge
 }

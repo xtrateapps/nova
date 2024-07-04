@@ -13,11 +13,20 @@ const userModel = require('../model/user.js');
 // Routes - con su funcionalidad lista
 
 // LISTAS NO TOCAR ------------------------------------------
+// Nueva transferencia
 router.post('/tx/new', async function(req, res) {
     try {
       res.json(await transactions.registerNewTransaction(req.body));
     } catch (err) {
-      console.error(`Error while creating transacction language`, err.message);
+      console.error(`Error while creating transacction`, err.message);
+    }
+});
+// Aprobar Recargas
+router.post('/rx/approve', async function(req, res) {
+    try {
+      res.json(await transactions.registerNewTransaction(req.body));
+    } catch (err) {
+      console.error(`Error while creating transacction`, err.message);
     }
 });
 // -----------------------------------------------------------------------------------------------
