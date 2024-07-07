@@ -11,25 +11,6 @@ const users =  require('../services/users');
 const transactionModel = require('../model/transactions');
 const userModel = require('../model/user.js');
 // Routes - con su funcionalidad lista
-
-
-
-// Nueva transferencia
-router.post('/tx/new', async function(req, res) {
-    try {
-      res.json(await transactions.registerNewTransaction(req.body));
-    } catch (err) {
-      console.error(`Error while creating transacction`, err.message);
-    }
-});
-// ---------------- Registrar nueva referencia ------------------
-router.post('/rx/registerNewReference', async function(req, res) {
-    try {
-      res.json(await recharges.registerNewRecharge(req.body));    
-    } catch (err) {
-      console.error(`Error while registering a new recharge operation`, err.message);
-    }
-});
 // Registrar nuevo usuario
 router.post('/register/new-user', async (req, res) => {
     try {
@@ -41,10 +22,14 @@ router.post('/register/new-user', async (req, res) => {
         console.error(`Error while creating new user mysql`, err.message);
     }
 })
-// -----------------------------------------------------------------
-
-// LISTAS NO TOCAR ----------------------------------
-// ---------------- Validar nueva recarga ------------------
+// ---------------- Registrar nueva referencia ------------------
+router.post('/rx/registerNewReference', async function(req, res) {
+    try {
+      res.json(await recharges.registerNewRecharge(req.body));    
+    } catch (err) {
+      console.error(`Error while registering a new recharge operation`, err.message);
+    }
+});
 // Aprobar Recargas
 router.post('/rx/approve', async function(req, res) {
     try {
@@ -53,6 +38,19 @@ router.post('/rx/approve', async function(req, res) {
       console.error(`Error while approving recharge`, err.message);
     }
 });
+// Nueva transferencia
+router.post('/tx/new', async function(req, res) {
+    try {
+      res.json(await transactions.registerNewTransaction(req.body));
+    } catch (err) {
+      console.error(`Error while creating transacction`, err.message);
+    }
+});
+
+
+// -----------------------------------------------------------------
+
+
 
 // Aprobar Recargas
 router.post('/rx/getByReference', async function(req, res) {

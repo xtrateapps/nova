@@ -40,26 +40,65 @@ async function getAllRechargesByReference(recharge) {
 }
 // Aprobar NOVA 
 async function approveRecharge(recharges) {  
+  if(recharges.reference == null || recharges.reference == "") {
+    let message = 'Objeto null';
+    let rows = {};
+    let status = {};
+    return {
+      message, 
+      rows,
+      status
+   };
+  } else {
+    const rows = await db.query(
+      `UPDATE recharges 
+      SET approve = true
+      WHERE reference = '${recharges.reference}'`
+    );
+  
+    console.log(rows)
+    let message = 'No hay una recarga con esa referencia asignada';
+    let status = 0
+    let user = ""
+    if (rows.affectedRows) {
+      message = 'Recharge approved successfully';
+      status = 1  
+      let user = "vmorenozx"
+    }
+    sendValidatedFunds(user)
+    return {
+      message, 
+      rows,
+      status
+   };
+  }
+  
+  
+}
+async function sendValidatedFunds(user) {
   const rows = await db.query(
-    `UPDATE recharges 
-    SET approve = true
-    WHERE reference = '${recharges.reference}'`
+    `UPDATE users 
+    SET saldo = 500
+    WHERE username = '${user}'`
   );
 
-  console.log(rows)
-  let message = 'No hay una recarga con esa referencia asignada';
+
   let status = 0
+  let message = " asdasdasd"
   if (rows.affectedRows) {
-    message = 'Recharge approved successfully';
+    message = 'lo hizo un monton de verte';
     status = 1  
+    sendValidatedFunds()
+    console.log(message);
   }
+
   return {
     message, 
     rows,
     status
   };
-}
 
+}
 
 // --------------------------------------------------------------------------------------------
 async function getMultiple(page = 1){
@@ -95,7 +134,7 @@ async function getMultiple(page = 1){
 
 
 async function registerNewRecharge(recharges) {
-  if(recharges.reference == "") {
+  if(recharges.reference == null || recharges.reference == "" || recharges.bank == "" || recharges.bank == null || recharges.cedula == "" || recharges.cedula == null || recharges.phone == "" || recharges.phone == null) {
     let status = 2
     console.log("recarga vacia");
     console.log(recharges);
@@ -148,5 +187,6 @@ module.exports = {
   getMultiple,
   registerNewRecharge,
   approveRecharge,
-  getAllRechargesByReference
+  getAllRechargesByReference,
+  sendValidatedFunds
 }
