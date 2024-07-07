@@ -35,9 +35,11 @@ router.post('/register/new-user', async (req, res) => {
     try {
         res.json(await users.registerNewUsers(req.body));
     } catch (err) {
-        console.error(`Error while creating transacction language`, err.message);
+        res.json({
+            "message": "Ya hay un usuario registrado con ese Email"
+        }).status(400);
+        console.error(`Error while creating new user mysql`, err.message);
     }
-
 })
 // -----------------------------------------------------------------
 

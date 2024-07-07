@@ -18,8 +18,11 @@ async function getMultiple(page = 1) {
 
 // Registrar nuevo usuario
 async function registerNewUsers(user) {
-  if(user.email == undefined) {
+  if(user.email == undefined || user.email == "") {
     console.log("email vacio");
+    let message = 'Email vacio';
+    let code = 1;
+    return {message,code};
   } else {
     const result = await db.query(
       `INSERT INTO users 
@@ -27,14 +30,14 @@ async function registerNewUsers(user) {
       VALUES 
       ('${user.name}', '${user.username}', '${user.email}', '${user.email_verified_at}', '${user.password}', '${user.saldo}', '${user.remember_token}}')`
     );
-  
-    let message = 'Error in registering new user';
-    let code = 1;
+    let message = 0
     if (result.affectedRows) {
-      message = 'Transaction registered successfully';
+      message = 'User registered successfully';
       code = 0;
+    } else {
+      message = 'Error in registering new user';
+      code = 1;
     }
-  
     console.log(message,code)
     return {message,code};
   }
