@@ -16,26 +16,27 @@ async function getMultiple(page = 1){
   }
 }
 
-async function  registerNewTransaction(transaction) {
+async function registerNewTransaction(transaction) {
+  // const result = await db.query(
+  //   `INSERT INTO transactions 
+  //   (reference, date, payment_number, bank, account_number, amount) 
+  //   VALUES 
+  //   ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
+  // );
+
   const result = await db.query(
-    `INSERT INTO transactions 
-    (reference, date, payment_number, bank, account_number, amount) 
-    VALUES 
-    ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
+    `SELECT * FROM transactons WHERE reference = ${transaction.reference}`
+    // `INSERT INTO transactions 
+    // (reference, date, payment_number, bank, account_number, amount) 
+    // VALUES 
+    // ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
   );
 
   let message = 'Error in registering new transaction';
 
   if (result.affectedRows) {
     message = 'Transaction registered successfully';
-    addNewFundsAterRegisteringNewTransaction({
-      "reference": "",
-      "date": "",
-      "payment_number": "",
-      "bank": "",
-      "account_number": "",
-      "amount": "",
-    })
+    
   }
 
   return {message};

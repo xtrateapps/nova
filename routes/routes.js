@@ -24,13 +24,61 @@ router.post('/tx/new', async function(req, res) {
 // Aprobar Recargas
 router.post('/rx/approve', async function(req, res) {
     try {
-      res.json(await transactions.registerNewTransaction(req.body));
+      res.json(await recharges.approveRecharge(req.body));
     } catch (err) {
-      console.error(`Error while creating transacction`, err.message);
+      console.error(`Error while approving recharge`, err.message);
     }
 });
 // -----------------------------------------------------------------------------------------------
+// TRAE TODAS LAS RECARGAS ----- ESTE METODO LO VEO PENSADO COOMO PARA EL ADMINISTRADOR O 
+// LA PERSONA ENCARGADA DE LLEVAR LAS RECARGAS
+// SERIA COMO UN TIPO DE USUARIO EXTRA EN UN UPDATE A ESTE METODO
+router.get('/rx', async function(req, res) {
+    try {
+      res.json(await recharges.getAllRecharges(req.body));   
+    } catch (err) {
+      console.error(`Error while getting all recharges (mysql)`, err.message);
+    }
+});
+//  Recharge por referencias
+router.post('/rx/getByReference', async function(req, res) {
+    try {
+      res.json(await recharges.getAllRechargesByReference(req.body));   
+    } catch (err) {
+      console.error(`Error while getting the referenced recharge (mysql)`, err.message);
+      res.json({
+        "message": "",
+        "rows": [
+            {
+                
+            }
+        ],
+        status: 0
+      });   
+    }
+});
+// 
+router.post('/rx/registerNewReference', async function(req, res) {
+    try {
+      res.json(await recharges.registerNewRecharge(req.body));   
+    } catch (err) {
+      console.error(`Error while registering a new recharge operation`, err.message);
+    }
+});
 
+
+
+
+// 
+// Aprobar Recargas
+router.get('/', async function(req, res) {
+    try {
+      res.json(await recharges.approveRecharge(req.body));
+    } catch (err) {
+      console.error(`Error inside of the mysql connector`, err.message);
+    }
+});
+// ----------------------------------------------------------------------------------
 
 
 
@@ -81,13 +129,6 @@ router.post('/user/data', async function(req, res) {
 
 // -------------------------------------------------------------------------------- //
 
-router.get('/rx/getByReference', async function(req, res) {
-    try {
-      res.json(await recharges.getMultiple(req.body));   
-    } catch (err) {
-      console.error(`Error while registering a new recharge operation`, err.message);
-    }
-});
 
 router.post('/rx/registerNewReference', async function(req, res) {
     try {

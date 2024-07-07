@@ -2,6 +2,68 @@ const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
 
+// ----------------------------------------------------------------------------------
+// Super Admin function
+async function getAllRecharges(page = 1) {
+  const offset = helper.getOffset(page, config.listPerPage);
+  const rows = await db.query(
+    "SELECT * FROM recharges"
+  );
+  const data = helper.emptyOrRows(rows);
+  const meta = {page};
+  return {
+    data,
+    meta
+  }
+}
+// ---------------------------------------------------------------------------------
+// Validar recarga a traves de numero de refencia, para pago movil / Luego invocar y sumar novas
+async function getAllRechargesByReference(recharge) {
+  const rows = await db.query(
+    `SELECT * FROM recharges WHERE reference = ${recharge.reference}`
+  );
+  let message = 'Ningun pago movil conicide con la referencia';
+  let status = 0;
+  if (rows.length > 0) {
+    message = 'Pago movil encontrado';
+    status = 1;
+  } else {
+    message = 'Pago movil no encontrado';
+    status = 0;
+    rows = {
+
+    }
+  }
+
+  return {
+    message, 
+    rows,
+    status
+  };
+}
+// Aprobar NOVA 
+async function approveRecharge(recharges) {  
+  const rows = await db.query(
+    `UPDATE recharges 
+    SET approve = true
+    WHERE reference = '${recharges.reference}'`
+  );
+
+  let message = 'No hay una recarga con esa referencia asignada';
+  let status = 0
+  if (rows.affectedRows) {
+    message = 'Recharge approved successfully';
+    status = 1  
+  }
+  return {
+    message, 
+    rows,
+    status
+  };
+}
+
+
+// --------------------------------------------------------------------------------------------
 async function getMultiple(page = 1){
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
@@ -15,6 +77,24 @@ async function getMultiple(page = 1){
     meta
   }
 }
+
+// -----------------------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------------------
+async function getMultiple(page = 1){
+  const offset = helper.getOffset(page, config.listPerPage);
+  const rows = await db.query(
+    "SELECT reference, date, payment_number, bank, account_number, amount FROM transactions"
+  );
+  const data = helper.emptyOrRows(rows);
+  const meta = {page};
+
+  return {
+    data,
+    meta
+  }
+}
+
 
 async function registerNewRecharge(recharges) {
   const result = await db.query(
@@ -33,20 +113,7 @@ async function registerNewRecharge(recharges) {
   return {message};
 }
 
-async function approveRecharge(recharges) {
-  const result = await db.query(
-    `SELECT * FROM recharges 
-    WHERE reference =  '${recharges.reference}'`
-  );
 
-  let message = 'Error approving recharge';
-
-  if (result.affectedRows) {
-    message = 'Recharge approved successfully';
-  }
-
-  return {message};
-}
 
 async function registerNewRecharge(recharges) {
     const result = await db.query(
@@ -66,7 +133,9 @@ async function registerNewRecharge(recharges) {
   }
 
 module.exports = {
+  getAllRecharges,
   getMultiple,
   registerNewRecharge,
-  approveRecharge
+  approveRecharge,
+  getAllRechargesByReference
 }

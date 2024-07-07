@@ -27,8 +27,11 @@ express.urlencoded({
     extended: true,
 })
 );
-app.get("/", (req, res) => {
-res.json({ message: "ok" });
+app.get("/", (req, res) => {    
+    res.json({ message: "osdsdsdk" });
+});
+app.post("/", (req, res) => {    
+    res.json({ message: "xxxxxx" });
 });
 app.use(bodyParser.json())
 app.use(express.json());
