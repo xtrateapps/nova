@@ -30,11 +30,8 @@ async function getAllRechargesByReference(recharge) {
   } else {
     message = 'Pago movil no encontrado';
     status = 0;
-    rows = {
-
-    }
+    rows = {}
   }
-
   return {
     message, 
     rows,
@@ -49,6 +46,7 @@ async function approveRecharge(recharges) {
     WHERE reference = '${recharges.reference}'`
   );
 
+  console.log(rows)
   let message = 'No hay una recarga con esa referencia asignada';
   let status = 0
   if (rows.affectedRows) {
@@ -97,25 +95,13 @@ async function getMultiple(page = 1){
 
 
 async function registerNewRecharge(recharges) {
-  const result = await db.query(
-    `INSERT INTO recharges 
-    (reference, bank, cedula, phone) 
-    VALUES 
-    ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}')`
-  );
-
-  let message = 'Error in registering new transaction';
-
-  if (result.affectedRows) {
-    message = 'Transaction registered successfully';
-  }
-
-  return {message};
-}
-
-
-
-async function registerNewRecharge(recharges) {
+  if(recharges.reference == "") {
+    let status = 2
+    console.log("recarga vacia");
+    console.log(recharges);
+    let message = 'Enviaste una recarga vacia';
+    return {status, message};
+  } else {
     const result = await db.query(
       `INSERT INTO recharges 
       (reference, bank, cedula, phone) 
@@ -124,13 +110,38 @@ async function registerNewRecharge(recharges) {
     );
   
     let message = 'Error in registering new transaction';
-  
+    let status = 0
     if (result.affectedRows) {
-      message = 'Transaction registered successfully';
+      status = 1
+      message = 'Transaction registered successsdsdsdfullssy';
+      console.log(recharges)
+      console.log(result)
+      console.log(recharges)
+    } else {
+
     }
-  
+    console.log("recarga llena");
+    console.log(recharges);
     return {message};
   }
+}
+
+// async function registerNewRecharge(recharges) {
+//     const result = await db.query(
+//       `INSERT INTO recharges 
+//       (reference, bank, cedula, phone) 
+//       VALUES 
+//       ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}')`
+//     );
+  
+//     let message = 'Error in registering new transaction';
+  
+//     if (result.affectedRows) {
+//       message = 'Transaction registered successfully';
+//     }
+  
+//     return {message};
+//   }
 
 module.exports = {
   getAllRecharges,

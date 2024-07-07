@@ -12,7 +12,8 @@ const transactionModel = require('../model/transactions');
 const userModel = require('../model/user.js');
 // Routes - con su funcionalidad lista
 
-// LISTAS NO TOCAR ------------------------------------------
+
+
 // Nueva transferencia
 router.post('/tx/new', async function(req, res) {
     try {
@@ -21,6 +22,27 @@ router.post('/tx/new', async function(req, res) {
       console.error(`Error while creating transacction`, err.message);
     }
 });
+// ---------------- Registrar nueva referencia ------------------
+router.post('/rx/registerNewReference', async function(req, res) {
+    try {
+      res.json(await recharges.registerNewRecharge(req.body));    
+    } catch (err) {
+      console.error(`Error while registering a new recharge operation`, err.message);
+    }
+});
+// Registrar nuevo usuario
+router.post('/register/new-user', async (req, res) => {
+    try {
+        res.json(await users.registerNewUsers(req.body));
+    } catch (err) {
+        console.error(`Error while creating transacction language`, err.message);
+    }
+
+})
+// -----------------------------------------------------------------
+
+// LISTAS NO TOCAR ----------------------------------
+// ---------------- Validar nueva recarga ------------------
 // Aprobar Recargas
 router.post('/rx/approve', async function(req, res) {
     try {
@@ -29,18 +51,8 @@ router.post('/rx/approve', async function(req, res) {
       console.error(`Error while approving recharge`, err.message);
     }
 });
-// -----------------------------------------------------------------------------------------------
-// TRAE TODAS LAS RECARGAS ----- ESTE METODO LO VEO PENSADO COOMO PARA EL ADMINISTRADOR O 
-// LA PERSONA ENCARGADA DE LLEVAR LAS RECARGAS
-// SERIA COMO UN TIPO DE USUARIO EXTRA EN UN UPDATE A ESTE METODO
-router.get('/rx', async function(req, res) {
-    try {
-      res.json(await recharges.getAllRecharges(req.body));   
-    } catch (err) {
-      console.error(`Error while getting all recharges (mysql)`, err.message);
-    }
-});
-//  Recharge por referencias
+
+// Aprobar Recargas
 router.post('/rx/getByReference', async function(req, res) {
     try {
       res.json(await recharges.getAllRechargesByReference(req.body));   
@@ -58,13 +70,36 @@ router.post('/rx/getByReference', async function(req, res) {
     }
 });
 // 
-router.post('/rx/registerNewReference', async function(req, res) {
+router.post('/rx/getByReference', async function(req, res) {
     try {
-      res.json(await recharges.registerNewRecharge(req.body));   
+      res.json(await recharges.getAllRechargesByReference(req.body));   
     } catch (err) {
-      console.error(`Error while registering a new recharge operation`, err.message);
+      console.error(`Error while getting the referenced recharge (mysql)`, err.message);
+      res.json({
+        "message": "",
+        "rows": [
+            {
+                
+            }
+        ],
+        status: 0
+      });   
     }
 });
+// ---------------------------------------------------------------------------------
+// TRAE TODAS LAS RECARGAS ----- ESTE METODO LO VEO PENSADO COOMO PARA EL ADMINISTRADOR O 
+// LA PERSONA ENCARGADA DE LLEVAR LAS RECARGAS
+// SERIA COMO UN TIPO DE USUARIO EXTRA EN UN UPDATE A ESTE METODO
+router.get('/rx', async function(req, res) {
+    try {
+      res.json(await recharges.getAllRecharges(req.body));   
+    } catch (err) {
+      console.error(`Error while getting all recharges (mysql)`, err.message);
+    }
+});
+//  Recharge por referencias
+
+
 
 
 
@@ -79,13 +114,6 @@ router.get('/', async function(req, res) {
     }
 });
 // ----------------------------------------------------------------------------------
-
-
-
-
-
-
-
 
 router.get('/tx/getAll', async function(req, res) {
     try {
@@ -140,24 +168,7 @@ router.post('/rx/registerNewReference', async function(req, res) {
 
 //   -----------------------------------------------------------------------------  // 
 // Usuarios + Creacion de Wallets - Recargas de Wallet
-// Lista de Transacciones 
-router.post('/register/new-user', async (req, res) => {
-    // const newUserData = new userModel({
-    //     name: req.body.name,
-    //     author: req.body.author,
-    //     username: req.body.username,
-    //     bio: req.body.bio,
-    //     wallet: Math.floor(Math.random() * 10000000888888888800),
-    //     created_at: req.body.created_at,
-    //     updated_at: req.body.updated_at
-    // })
-    try {
-        res.json(await users.registerNewUsers(req.body));
-    } catch (err) {
-        console.error(`Error while creating transacction language`, err.message);
-    }
 
-})
 
 router.post('/login', async (req, res) => {
     // const newUserData = new userModel({
