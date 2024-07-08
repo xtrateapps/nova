@@ -31,10 +31,16 @@ router.post('/rx/registerNewReference', async function(req, res) {
     }
 });
 // Aprobar Recargas
-router.post('/rx/approve', async function(req, res) {
+router.post('/rx/approve', async function(req, res) {   
     try {
       res.json(await recharges.approveRecharge(req.body));
     } catch (err) {
+        let messagge = err.message
+        res.json({
+            "messagge": messagge,
+            "status": 2 
+        }
+    );
       console.error(`Error while approving recharge`, err.message);
     }
 });

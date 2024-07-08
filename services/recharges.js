@@ -134,7 +134,7 @@ async function getMultiple(page = 1){
 
 
 async function registerNewRecharge(recharges) {
-  if(recharges.reference == null || recharges.reference == "" || recharges.bank == "" || recharges.bank == null || recharges.cedula == "" || recharges.cedula == null || recharges.phone == "" || recharges.phone == null) {
+  if(recharges.reference == null || recharges.reference == "" || recharges.username_destiny == null || recharges.username_destiny == "" || recharges.bank == "" || recharges.bank == null || recharges.cedula == "" || recharges.cedula == null || recharges.phone == "" || recharges.phone == null) {
     let status = 2
     console.log("recarga vacia");
     console.log(recharges);
@@ -143,12 +143,12 @@ async function registerNewRecharge(recharges) {
   } else {
     const result = await db.query(
       `INSERT INTO recharges 
-      (reference, bank, cedula, phone) 
+      (reference, bank, cedula, phone, username_destiny, send_amount) 
       VALUES 
-      ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}')`
+      ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}', '${recharges.username_destiny}', '${recharges.send_amount}')`
     );
   
-    let message = 'Error in registering new transaction';
+    let message = 'Error in registering new recharges';
     let status = 0
     if (result.affectedRows) {
       status = 1
