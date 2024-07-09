@@ -143,7 +143,7 @@ async function sendValidatedFunds(user, send_amount) {
     `SELECT username FROM users WHERE username = '${user}'`
   );
   console.log("fucking selected");
-  console.log(userSelected);
+  console.log(userSelected[0].username);  
   console.log("fucking selected");
   console.log(user);
   console.log("fucking user");
@@ -152,14 +152,14 @@ async function sendValidatedFunds(user, send_amount) {
   const rows = await db.query(
     `UPDATE users 
     SET saldo = '${send_amount[0].send_amount}'
-    WHERE username = '${user}'`
+    WHERE username = '${userSelected[0].username}'`
   );
   let status = 0
   let message = " asdasdasd"
   if (rows.affectedRows) {
     message = 'lo hizo un monton de verte';
     status = 1  
-    sendValidatedFunds()
+    // sendValidatedFunds()
     console.log(message);
   }
   return {
