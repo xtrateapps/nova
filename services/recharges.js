@@ -142,12 +142,19 @@ async function sendValidatedFunds(user, send_amount) {
   const userSelected = await db.query(
     `SELECT username FROM users WHERE username = '${user}'`
   );
+  const userSelectedAmount = await db.query(
+    `SELECT saldo FROM users WHERE username = '${user}'`
+  );
   console.log("fucking selected");
   console.log(userSelected[0].username);  
   console.log("fucking selected");
   console.log(user);
   console.log("fucking user");
   console.log(send_amount[0].send_amount);
+  console.log("fucking user");
+  console.log(send_amount[0].send_amount + userSelectedAmount);
+  
+  console.log(send_amount[0].send_amount + userSelectedAmount[0].saldo);
   // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   const rows = await db.query(
     `UPDATE users 
