@@ -131,12 +131,12 @@ async function approveRecharge(recharges) {
 }
 async function sendValidatedFunds(user, send_amount) {
   const userSelected = await db.query(
-    `SELECT saldo FROM users WHERE username = '${user}'`
+    `SELECT username FROM users WHERE username = '${user}'`
   )
   console.log(userSelected);
   const rows = await db.query(
     `UPDATE users 
-    SET saldo = '${send_amount + userSelected}'
+    SET saldo = '${send_amount}'
     WHERE username = '${user}'`
   );
   let status = 0
