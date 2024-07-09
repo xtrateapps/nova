@@ -60,9 +60,9 @@ async function registerNewRecharge(recharges) {
     } else {
       const result = await db.query(
         `INSERT INTO recharges 
-        (reference, bank, cedula, phone, username_destiny, send_amount) 
+        (reference, bank, cedula, phone, username_destiny, send_amount, approve) 
         VALUES 
-        ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}', '${recharges.username_destiny}', '${recharges.send_amount}')`
+        ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}', '${recharges.username_destiny}', '${recharges.send_amount}', false)`
       );
     
       let message = 'Error in registering new recharges';

@@ -17,13 +17,13 @@ async function getMultiple(page = 1) {
 }
 
 // Registrar nuevo usuario
-async function registerNewUsers(user) {
+async function registerNewUsers(user) {``
   if(user.email == undefined || user.email == "") {
     console.log("email vacio");
     let message = 'Email vacio';
     let code = 1;
     return {message,code};
-  } else {
+  } else {  
     const result = await db.query(
       `INSERT INTO users 
       (name, username, email, email_verified_at, password, saldo, remember_token) 
