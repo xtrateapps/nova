@@ -17,7 +17,7 @@ router.post('/register/new-user', async (req, res) => {
         res.json(await users.registerNewUsers(req.body));
     } catch (err) {
         res.json({
-            "message": "Ya hay un usuario registrado con ese Email"
+            "message": "Ya hay un usuario registrado con ese Email" + err.message
         }).status(400);
         console.error(`Error while creating new user mysql`, err.message);
     }
