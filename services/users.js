@@ -46,7 +46,7 @@ async function registerNewUsers(user) {``
 
 async function getUserByEmail(user) {
   let result = await db.query(
-    `SELECT email, username FROM users WHERE email = '${user.email}' LIMIT 1` 
+    `SELECT * FROM users WHERE email = '${user.email}' LIMIT 1` 
   );
 
   let message = 'Datos no encontrados';
@@ -54,7 +54,7 @@ async function getUserByEmail(user) {
   let code = 1
 
   if (result.length > 0) {
-    message = 'Datos de usuario ';
+    message = 'Datos de usuario';
     code = 0
     result = result[0];
   }
@@ -70,7 +70,7 @@ async function getUserByEmail(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT email FROM users WHERE email = '${user.email}' AND password = '${user.password}'` 
+      `SELECT email, username FROM users WHERE email = '${user.email}' AND password = '${user.password}'` 
     );
     let message = 'Usuario no registrado';
     let code = 1
