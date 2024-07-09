@@ -98,7 +98,7 @@ async function approveRecharge(recharges) {
   } else {
     const rows = await db.query(
       `UPDATE recharges 
-      SET approve = true
+      SET approved = true
       WHERE reference = '${recharges.reference}'`
     );
   
