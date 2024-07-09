@@ -141,6 +141,8 @@ async function sendValidatedFunds(user, send_amount) {
     `SELECT username FROM users WHERE username = '${user}'`
   )
   console.log(userSelected);
+  console.log(user);
+  console.log(send_amount);
   const rows = await db.query(
     `UPDATE users 
     SET saldo = '${send_amount}'
