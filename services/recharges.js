@@ -137,12 +137,18 @@ async function approveRecharge(recharges) {
   
 }
 async function sendValidatedFunds(user, send_amount) {
+  // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  
   const userSelected = await db.query(
     `SELECT username FROM users WHERE username = '${user[0]}'`
-  )
+  );
+  console.log("fucking selected");
   console.log(userSelected);
+  console.log("fucking selected");
   console.log(user[0]);
-  console.log(send_amount[0]);
+  console.log("fucking user");
+  console.log(send_amount[0].send_amount);
+  // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   const rows = await db.query(
     `UPDATE users 
     SET saldo = '${send_amount[0]}'
