@@ -25,9 +25,12 @@ router.post('/register/new-user', async (req, res) => {
 // ---------------- Registrar nueva referencia ------------------
 router.post('/rx/registerNewReference', async function(req, res) {
     try {
-      res.json(await recharges.registerNewRecharge(req.body));    
+        res.json(await recharges.registerNewRecharge(req.body));    
     } catch (err) {
-      console.error(`Error while registering a new recharge operation`, err.message);
+        res.json({
+            "message": err.message
+        }).status(400);   
+        console.error(`Error while registering a neasdasdasn`, err.message);
     }
 });
 // Aprobar Recargas

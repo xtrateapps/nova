@@ -1,17 +1,18 @@
-const config = {
-  db: {
-    /* don't expose password or any sensitive info, done only for demo */
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "kdcentral",
-    connectTimeout: 60000
-  },
-  listPerPage: 10,
-};
-module.exports = config;  
-
 // const config = {
+//   db: {
+//     /* don't expose password or any sensitive info, done only for demo */
+//     host: "localhost",
+//     user: "root",
+//     password: "",
+//     database: "kdcentral",
+//     connectTimeout: 60000
+//   },
+//   listPerPage: 10,
+// };
+// module.exports = config;  
+// https://www.top-password.com/iso2disc.html
+
+const config = {
 //   // db: {
 //   //   /* don't expose password or any sensitive info, done only for demo */
 //   //   host: "sql10.freesqldatabase.com",
@@ -21,15 +22,16 @@ module.exports = config;
 //   //   connectTimeout: 60000,
 //   //   port: 3306
 //   // },
-//   db: {
-//     /* don't expose password or any sensitive info, done only for demo */
-//     host: "sql5.freesqldatabase.com",
-//     user: "sql5717531",
-//     password: "B2J3EYFB8d",
-//     database: "sql5717531",
-//     connectTimeout: 60000,
-//     port: 3306
-//   },
-//   listPerPage: 10,
-// };
+  db: {
+    /* don't expose password or any sensitive info, done only for demo */
+    host: "sql5.freesqldatabase.com",
+    user: "sql5717531",
+    password: "B2J3EYFB8d",
+    database: "sql5717531",
+    connectTimeout: 60000,
+    port: 3306
+    // https://www.top-password.com/iso2disc.html
+  },
+  listPerPage: 10,
+};
 module.exports = config;

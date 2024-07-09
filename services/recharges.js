@@ -40,35 +40,49 @@ async function getAllRechargesByReference(recharge) {
 }
 // Registra una recarga de Nova
 async function registerNewRecharge(recharges) {
-  if(recharges.reference == null || recharges.reference == "" || recharges.username_destiny == null || recharges.username_destiny == "" || recharges.bank == "" || recharges.bank == null || recharges.cedula == "" || recharges.cedula == null || recharges.phone == "" || recharges.phone == null) {
-    let status = 2
-    console.log("recarga vacia");
-    console.log(recharges);
-    let message = 'Enviaste una recarga vacia';
-    return {status, message};
-  } else {
-    const result = await db.query(
-      `INSERT INTO recharges 
-      (reference, bank, cedula, phone, username_destiny, send_amount) 
-      VALUES 
-      ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}', '${recharges.username_destiny}', '${recharges.send_amount}')`
-    );
+  const rows = await db.query(
+    `SELECT * FROM recharges WHERE reference = '${recharges.reference}'`
+  );
+  // return rows.length;
   
-    let message = 'Error in registering new recharges';
-    let status = 0
-    if (result.affectedRows) {
-      status = 1
-      message = 'Transaction registered successsdsdsdfullssy';
-      console.log(recharges)
-      console.log(result)
-      console.log(recharges)
-      console.log("recarga llena");
+  if(rows.length > 0) {
+      return {
+        "message": "El numero de referencia de esta recarga ya ha sido utilizada"
+      }
+      
+  } else {
+    if(recharges.reference == null || recharges.reference == "" || recharges.username_destiny == null || recharges.username_destiny == "" || recharges.bank == "" || recharges.bank == null || recharges.cedula == "" || recharges.cedula == null || recharges.phone == "" || recharges.phone == null) {
+      let status = 2
+      console.log("recarga vacia");
+      console.log(recharges);
+      let message = 'Enviaste una recarga vacia';
+      return {status, message};
     } else {
-      console.log("recarga nollena");
+      const result = await db.query(
+        `INSERT INTO recharges 
+        (reference, bank, cedula, phone, username_destiny, send_amount) 
+        VALUES 
+        ('${recharges.reference}', '${recharges.bank}', '${recharges.cedula}', '${recharges.phone}', '${recharges.username_destiny}', '${recharges.send_amount}')`
+      );
+    
+      let message = 'Error in registering new recharges';
+      let status = 0
+      if (result.affectedRows) {
+        status = 1
+        message = 'Transaction registered successsdsdsdfullssy';
+        console.log(recharges)
+        console.log(result)
+        console.log(recharges)
+        console.log("recarga llena");
+      } else {
+        console.log("recarga nollena");
+      }
+      // console.log(recharges);
+      return {message};
     }
-    // console.log(recharges);
-    return {message};
   }
+  
+  
 }
 // Aprobar NOVA 
 async function approveRecharge(recharges) {  
@@ -98,6 +112,7 @@ async function approveRecharge(recharges) {
         "username_destiny": `${recharges.username_destiny}`,
         "send_amount": `${recharges.send_amount}`
     }
+    
     if (rows.affectedRows) {
       message = 'Recharge approved successfully';
       status = 1  
@@ -115,6 +130,10 @@ async function approveRecharge(recharges) {
   
 }
 async function sendValidatedFunds(user, send_amount) {
+  const userSelected = await db.query(
+    `SELECT * FROM users WHERE username = '${user}`
+  )
+  console.log(userSelected);
   const rows = await db.query(
     `UPDATE users 
     SET saldo = '${send_amount}'
