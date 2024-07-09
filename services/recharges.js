@@ -101,8 +101,15 @@ async function approveRecharge(recharges) {
       SET approve = true
       WHERE reference = '${recharges.reference}'`
     );
+
+    const amountToRecharge = await db.query(
+      `SELECT send_amount 
+      FROM recharges
+      WHERE reference = '${recharges.reference}'`
+    );
   
     console.log(rows)
+    console.log(amountToRecharge)
     let message = 'No hay una recarga con esa referencia asignada';
     let status = 0
     let user = ""
@@ -110,7 +117,7 @@ async function approveRecharge(recharges) {
     let validatedFundsToSend = {
         "reference" : `${recharges.reference}`,
         "username_destiny": `${recharges.username_destiny}`,
-        "send_amount": `${recharges.send_amount}`
+        "send_amount": `${amountToRecharge}`
     }
     
     if (rows.affectedRows) {
@@ -118,7 +125,7 @@ async function approveRecharge(recharges) {
       status = 1  
       user = recharges.username_destiny
       send_amount = recharges.send_amount
-      sendValidatedFunds(user, send_amount)
+      sendValidatedFunds(user, amountToRecharge)
     }
     return {
       message, 
@@ -146,7 +153,7 @@ async function sendValidatedFunds(user, send_amount) {
     status = 1  
     sendValidatedFunds()
     console.log(message);
-  } 
+  }
   return {
     message, 
     rows,
