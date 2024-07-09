@@ -28,7 +28,7 @@ async function registerNewUsers(user) {``
       `INSERT INTO users 
       (name, username, email, email_verified_at, password, saldo, remember_token) 
       VALUES 
-      ('${user.name}', '${user.username}', '${user.email}', '', '${user.password}', 0, '${user.remember_token}}')`
+      ('${user.name}', '${user.username}', '${user.email}', null, '${user.password}', 0, '${user.remember_token}}')`
     );
     let message = 0
     if (result.affectedRows) {
