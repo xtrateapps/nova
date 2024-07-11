@@ -42,15 +42,15 @@ async function registerNewTransaction(transaction) {
   return {message};
 }
 
-async function sendDirectFundsFromOneUserToAnother(transaction, userToReceiveMoney) {
+async function sendDirectFundsFromOneUserToAnother(transaction) {
   // return transaction;
   let result = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
   );
   let result2 = await db.query(
-    `SELECT saldo, username FROM users WHERE username = '${userToReceiveMoney.username}' LIMIT 1` 
+    `SELECT saldo, username FROM users WHERE username = '${transaction.destiny}' LIMIT 1` 
   );
-  if(result[0].username = result2[0].username) {
+  if(result[0].username == userToReceiveMoney) {
     return "No puedes enviar el mismo username"
   } else {
     let saldoReceptor = result[0].saldo
