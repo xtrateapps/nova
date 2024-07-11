@@ -45,7 +45,7 @@ async function registerNewTransaction(transaction) {
 async function sendDirectFundsFromOneUserToAnother(transaction) {
   // return transaction;
   let result = await db.query(
-    `SELECT * FROM users WHERE email = '${transaction.email}' LIMIT 1` 
+    `SELECT * FROM users WHERE username = '${transaction.username}' LIMIT 1` 
   );
   return result;   
   // let message = 'Datos no encontrados';
