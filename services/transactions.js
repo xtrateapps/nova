@@ -59,9 +59,9 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   if(transactionUsername == transactionDestiny) {
     return "No puedes enviar dineo al mismo username"
   } else {
-    let saldoReceptor = result[0].saldo
+    let saldoReceptor = result.saldo
     
-    let saldoEmisor = result2[0].saldo
+    let saldoEmisor = result2.saldo
     let transaccionUsername = transaction.destiny
     return {
       transaccionUsername,
