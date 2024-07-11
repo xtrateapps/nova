@@ -47,6 +47,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     `SELECT * FROM users WHERE email = '${user.email}' LIMIT 1` 
   );
 
+  log.i(result)
   let message = 'Datos no encontrados';
 
   let code = 1
@@ -56,7 +57,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     code = 0
     result = result[0];
   }
-
+}
 async function sendDirectFundsFromOneUserToAnother(transaction) {
   console.log(result, message, transaction)
   return {
@@ -91,13 +92,10 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
 
 async function  addNewFundsAterRegisteringNewTransaction(transaction) {
   const result = await db.query("SELECT * , (SELECT sum(saldo)  FROM users WHERE email = 'vmorenozx@gmail.com') as `items_total` FROM transactions WHERE account_number = '')");
-
   let message = 'Error in registering new transaction';
-
   if (result.affectedRows) {
     message = 'Transaction registered successfully';
   }
-
   return {message};
 }
 
