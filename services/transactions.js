@@ -50,13 +50,13 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   let result2 = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transaction.destiny}' LIMIT 1` 
   );
-  if(result[0].username == userToReceiveMoney) {
+  if(result[0].username == result2[0].username) {
     return "No puedes enviar el mismo username"
   } else {
     let saldoReceptor = result[0].saldo
     
     let saldoEmisor = result2[0].saldo
-    let transaccionUsername = transaction.username
+    let transaccionUsername = transaction.destiny
     return {
       transaccionUsername,
       saldoReceptor,
