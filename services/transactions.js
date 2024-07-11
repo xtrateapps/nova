@@ -63,23 +63,19 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   if(transactionUsername == transactionDestiny) {
     return "No puedes enviar dinero al mismo usuario"
   } else {
-    let totalSuma = result.saldo + transaction.amount
+    let totalSuma = result2.saldo + transaction.amount
     
 
-    const rows = await db.query(
+    let rows = await db.query(
       `UPDATE users 
       SET saldo = '${result2.saldo}'
       WHERE username = '${result2.username}'`
     );
-
-
     // let saldoReceptor = result.saldo
     // let transaccionUsername = transactionDestiny
     return {
-      // totalSuma,
-      // saldoReceptor,
-      // saldoEmisor,
-      rows
+      rows,
+      totalSuma
     }
 
     // let update1 = await db.query(
