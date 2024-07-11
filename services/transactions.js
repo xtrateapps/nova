@@ -63,12 +63,12 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
       saldoEmisor
     }
 
-    let update1 = await db.query(
-      `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
-    );
-    let update2 = await db.query(
-      `SELECT saldo, username FROM users WHERE username = '${userToReceiveMoney.username}' LIMIT 1` 
-    );
+    // let update1 = await db.query(
+    //   `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+    // );
+    // let update2 = await db.query(
+    //   `SELECT saldo, username FROM users WHERE username = '${userToReceiveMoney.username}' LIMIT 1` 
+    // );
     // let message = 'Datos no encontrados';
     console.log(result);
     console.log(message);
