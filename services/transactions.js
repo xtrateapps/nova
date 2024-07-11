@@ -52,7 +52,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   // return {transactionUsername, transactionDestiny}
   let result = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
-  );
+  );  
   let result2 = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
   );
@@ -64,15 +64,16 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     return "No puedes enviar dinero al mismo usuario"
   } else {
     let totalSuma = result.saldo + transaction.amount
+    
+
     const rows = await db.query(
       `UPDATE users 
-      SET saldo = '${saldoEmisor}'
+      SET saldo = '${result2.saldo}'
       WHERE username = '${userSelected[0].username}'`
     );
 
 
     let saldoReceptor = result.saldo
-    let saldoEmisor = result2.saldo
     let transaccionUsername = transactionDestiny
     return {
       totalSuma,
