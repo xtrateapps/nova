@@ -53,6 +53,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   );
   let saldoEmisor = result2[0].saldo
   return {
+    transaction,
     saldoReceptor,
     saldoEmisor
   }
