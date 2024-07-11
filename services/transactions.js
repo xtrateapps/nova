@@ -56,7 +56,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   let result2 = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
   );
-  console.log(result);
+  console.log(result.saldo);
   console.log(result2.saldo);
   console.log(transaction.amount);
 
@@ -66,8 +66,8 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     let totalSuma = result.saldo + transaction.amount
     const rows = await db.query(
       `UPDATE users 
-      SET saldo = '${totalSuma}'
-      WHERE username = '${transactionDestiny}'`
+      SET saldo = '${send_amount[0].send_amount + userSelectedAmount[0].saldo}'
+      WHERE username = '${userSelected[0].username}'`
     );
 
 
