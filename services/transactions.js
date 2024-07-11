@@ -69,7 +69,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     const rows = await db.query(
       `UPDATE users 
       SET saldo = '${result2.saldo}'
-      WHERE username = '${userSelected}'`
+      WHERE username = '${result2.username}'`
     );
 
 
