@@ -56,8 +56,9 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   let result2 = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
   );
-  console.log(result);
-  console.log(result2);
+  console.log("asdasdasdasdasdasd");
+  console.log(result[0].saldo);
+  console.log(result2[0].saldos);
 
   if(transactionUsername == transactionDestiny) {
     return "No puedes enviar dineo al mismo username"
