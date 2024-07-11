@@ -42,15 +42,22 @@ async function registerNewTransaction(transaction) {
   return {message};
 }
 
-async function sendDirectFundsFromOneUserToAnother(transaction) {
+async function sendDirectFundsFromOneUserToAnother(transaction, userToReceiveMoney) {
   // return transaction;
   let result = await db.query(
-    `SELECT saldo FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+    `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
   );
-  let saldoReceptor = result[0].saldo
   let result2 = await db.query(
-    `SELECT saldo FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+    `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
   );
+  if(result[0].username  = result2[0].username) {
+    return "mismos users"
+  } else {
+    return "no mismos users"
+  }
+  
+  let saldoReceptor = result[0].saldo
+  
   let saldoEmisor = result2[0].saldo
   let transaccionUsername = transaction.username
   return {
