@@ -45,14 +45,15 @@ async function registerNewTransaction(transaction) {
 async function sendDirectFundsFromOneUserToAnother(transaction) {
   // return transaction;
   let transactionUsername = transaction.username
-  let transactionDestiny = transaction.destiny
+  let c = transaction.destiny
   console.log(transaction);
+  console.log(transactionUsername);
   console.log(transactionDestiny);
   let result = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
   );
   let result2 = await db.query(
-    `SELECT saldo, username FROM users WHERE username = '${transaction.destiny}' LIMIT 1` 
+    `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
   );
   if(result[0].username == result2[0].destiny) {
     return "No puedes enviar el mismo username"
