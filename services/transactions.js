@@ -44,14 +44,12 @@ async function registerNewTransaction(transaction) {
 
 async function sendDirectFundsFromOneUserToAnother(transaction) {
   let result = await db.query(
-    `SELECT * FROM users WHERE email = '${user.email}' LIMIT 1` 
+    `SELECT * FROM users WHERE email = '${transaction.email}' LIMIT 1` 
   );
   let message = 'Datos no encontrados';
   console.log(result);
-  console.log(message);
-
+  console.log(message);``
   let code = 1
-
   if (result.length > 0) {
     message = 'Datos de usuario';
     code = 0
