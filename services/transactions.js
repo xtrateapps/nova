@@ -44,9 +44,12 @@ async function registerNewTransaction(transaction) {
 
 async function sendDirectFundsFromOneUserToAnother(transaction) {
   // return transaction;
+  let transactionUsername = transaction.username
+  let transactionDestiny = transaction.destiny
   console.log(transaction);
+  console.log(transactionDestiny);
   let result = await db.query(
-    `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+    `SELECT saldo, username FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
   );
   let result2 = await db.query(
     `SELECT saldo, username FROM users WHERE username = '${transaction.destiny}' LIMIT 1` 
