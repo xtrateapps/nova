@@ -112,5 +112,5 @@ async function  addNewFundsAterRegisteringNewTransaction(transaction) {
 module.exports = {
   getMultiple,
   registerNewTransaction,
-  sendDirectFundsFromOneUserToAnoother
+  sendDirectFundsFromOneUserToAnother 
 }
