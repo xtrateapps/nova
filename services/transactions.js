@@ -52,8 +52,9 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     `SELECT saldo FROM users WHERE username = '${transaction.username}' LIMIT 1` 
   );
   let saldoEmisor = result2[0].saldo
+  let transaccionUsername = transaction.username
   return {
-    transaction,
+    transaccionUsername,
     saldoReceptor,
     saldoEmisor
   }
