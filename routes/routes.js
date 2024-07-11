@@ -22,6 +22,12 @@ router.post('/register/new-user', async (req, res) => {
         console.error(`Error while creating new user mysql`, err.message);
     }
 })
+// ***************************TRANSFERENCIAS*****************************************
+
+// ----------------- Enviar nueva tranSferencia directa ****************************
+
+
+
 // ---------------- Registrar nueva referencia ------------------
 router.post('/rx/registerNewReference', async function(req, res) {
     try {
@@ -55,6 +61,17 @@ router.post('/tx/new', async function(req, res) {
       console.error(`Error while creating transacction`, err.message);
     }
 });
+
+
+router.post('/tx/directTransfer', async function(req, res) {
+    try {
+      res.json(await transactions.sendDirectFundsFromOneUserToAnother(req.body));
+    } catch (err) {
+      console.error(`Error while sending funds`, err.message);
+    }
+});
+
+sendDirectFundsFromOneUserToAnother
 
 
 // -----------------------------------------------------------------
