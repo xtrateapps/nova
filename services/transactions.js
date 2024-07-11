@@ -42,7 +42,7 @@ async function registerNewTransaction(transaction) {
   return {message};
 }
 
-async function sendDirectFundsFromOneUserToAnoother(transaction) {
+async function sendDirectFundsFromOneUserToAnother(transaction) {
   // return transaction;
   let result = await db.query(
     `SELECT saldo FROM users WHERE username = '${transaction.username}' LIMIT 1` 
