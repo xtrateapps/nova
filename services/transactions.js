@@ -48,34 +48,40 @@ async function sendDirectFundsFromOneUserToAnother(transaction, userToReceiveMon
     `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
   );
   let result2 = await db.query(
-    `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+    `SELECT saldo, username FROM users WHERE username = '${userToReceiveMoney.username}' LIMIT 1` 
   );
-  if(result[0].username  = result2[0].username) {
-    return "mismos users"
+  if(result[0].username = result2[0].username) {
+    return "No puedes enviar el mismo username"
   } else {
-    return "no mismos users"
+    let saldoReceptor = result[0].saldo
+    
+    let saldoEmisor = result2[0].saldo
+    let transaccionUsername = transaction.username
+    return {
+      transaccionUsername,
+      saldoReceptor,
+      saldoEmisor
+    }
+
+    let update1 = await db.query(
+      `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+    );
+    let update2 = await db.query(
+      `SELECT saldo, username FROM users WHERE username = '${userToReceiveMoney.username}' LIMIT 1` 
+    );
+    // let message = 'Datos no encontrados';
+    console.log(result);
+    console.log(message);
+    console.log(transaction);
+    let code = 1
+    if (result.length > 0) {
+      message = 'Datos de usuario';
+      code = 0
+      result = result[0];
+      console.log(result[0]);
+    }
   }
   
-  let saldoReceptor = result[0].saldo
-  
-  let saldoEmisor = result2[0].saldo
-  let transaccionUsername = transaction.username
-  return {
-    transaccionUsername,
-    saldoReceptor,
-    saldoEmisor
-  }
-  // let message = 'Datos no encontrados';
-  console.log(result);
-  console.log(message);
-  console.log(transaction);
-  let code = 1
-  if (result.length > 0) {
-    message = 'Datos de usuario';
-    code = 0
-    result = result[0];
-    console.log(result[0]);
-  }
 }
 // async function sendDirectFundsFromOneUserToAnother(transaction) {
 //   console.log(result, message, transaction)
