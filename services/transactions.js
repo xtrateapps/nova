@@ -58,6 +58,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   );
   console.log(result[0].saldo);
   console.log(result2[0].saldo);
+  console.log(result2[0].amount);
 
   if(transactionUsername == transactionDestiny) {
     return "No puedes enviar dinero al mismo usuario"
