@@ -43,6 +43,7 @@ async function registerNewTransaction(transaction) {
 }
 
 async function sendDirectFundsFromOneUserToAnother(transaction) {
+  return transaction;
   let result = await db.query(
     `SELECT * FROM users WHERE email = '${transaction.email}' LIMIT 1` 
   );
