@@ -42,10 +42,10 @@ async function registerNewTransaction(transaction) {
   return {message};
 }
 
-async function sendDirectFundsFromOneUserToAnother(transaction) {
+async function sendDirectFundsFromOneUserToAnoother(transaction) {
   // return transaction;
   let result = await db.query(
-    `SELECT sald0 FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+    `SELECT saldo FROM users WHERE username = '${transaction.username}' LIMIT 1` 
   );
   let saldoReceptor = result[0].saldo
   let result2 = await db.query(
@@ -112,5 +112,5 @@ async function  addNewFundsAterRegisteringNewTransaction(transaction) {
 module.exports = {
   getMultiple,
   registerNewTransaction,
-  sendDirectFundsFromOneUserToAnother
+  sendDirectFundsFromOneUserToAnoother
 }
