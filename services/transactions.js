@@ -48,7 +48,8 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   );
   let message = 'Datos no encontrados';
   console.log(result);
-  console.log(message);``
+  console.log(message);
+  console.log(transaction);
   let code = 1
   if (result.length > 0) {
     message = 'Datos de usuario';
