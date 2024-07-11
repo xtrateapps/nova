@@ -71,7 +71,7 @@ router.post('/tx/directTransfer', async function(req, res) {
     }
 });
 
-sendDirectFundsFromOneUserToAnother
+// sendDirectFundsFromOneUserToAnother
 
 
 // -----------------------------------------------------------------
