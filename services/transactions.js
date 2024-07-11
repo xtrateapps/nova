@@ -45,7 +45,7 @@ async function registerNewTransaction(transaction) {
 async function sendDirectFundsFromOneUserToAnother(transaction) {
   // return transaction;
   let transactionUsername = transaction.username
-  let c = transaction.destiny
+  let transactionDestiny = transaction.destiny
   console.log(transaction);
   console.log(transactionUsername);
   console.log(transactionDestiny);
