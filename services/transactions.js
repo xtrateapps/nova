@@ -46,8 +46,9 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   let result = await db.query(
     `SELECT * FROM users WHERE email = '${user.email}' LIMIT 1` 
   );
-  console.log(result)
   let message = 'Datos no encontrados';
+  console.log(result);
+  console.log(message);
 
   let code = 1
 
@@ -55,39 +56,40 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     message = 'Datos de usuario';
     code = 0
     result = result[0];
+    console.log(result[0]);
   }
 }
-async function sendDirectFundsFromOneUserToAnother(transaction) {
-  console.log(result, message, transaction)
-  return {
-    result,
-    message,
-    code
-  }
-  // const result = await db.query(
-  //   `INSERT INTO transactions 
-  //   (reference, date, payment_number, bank, account_number, amount) 
-  //   VALUES 
-  //   ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
-  // );
+// async function sendDirectFundsFromOneUserToAnother(transaction) {
+//   console.log(result, message, transaction)
+//   return {
+//     result,
+//     message,
+//     code
+//   }
+//   // const result = await db.query(
+//   //   `INSERT INTO transactions 
+//   //   (reference, date, payment_number, bank, account_number, amount) 
+//   //   VALUES 
+//   //   ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
+//   // );
 
-  // const result = await db.query(
-  //   `SELECT * FROM transactons WHERE reference = ${transaction.reference}`
-  //   // `INSERT INTO transactions 
-  //   // (reference, date, payment_number, bank, account_number, amount) 
-  //   // VALUES 
-  //   // ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
-  // );
+//   // const result = await db.query(
+//   //   `SELECT * FROM transactons WHERE reference = ${transaction.reference}`
+//   //   // `INSERT INTO transactions 
+//   //   // (reference, date, payment_number, bank, account_number, amount) 
+//   //   // VALUES 
+//   //   // ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
+//   // );
 
-  // let message = 'Error in registering new transaction';
+//   // let message = 'Error in registering new transaction';
 
-  // if (result.affectedRows) {
-  //   message = 'Transaction registered successfully';
+//   // if (result.affectedRows) {
+//   //   message = 'Transaction registered successfully';
     
-  // }
+//   // }
 
-  // return {message};
-}
+//   // return {message};
+// }
 
 async function  addNewFundsAterRegisteringNewTransaction(transaction) {
   const result = await db.query("SELECT * , (SELECT sum(saldo)  FROM users WHERE email = 'vmorenozx@gmail.com') as `items_total` FROM transactions WHERE account_number = '')");
