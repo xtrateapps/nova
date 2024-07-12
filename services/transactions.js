@@ -78,23 +78,31 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
       console.log(result2[0].saldo + transaction.amount);
       console.log("result2[0].saldo + transaction.amount");
       
-      let rows = await db.query(
-        `UPDATE users 
-        SET saldo = '${result2[0].saldo + transaction.amount}'
-        WHERE username = '${transactionDestiny}'`
-      );
+      let checkIfNegativeSign = result[0].saldo - transaction.amount
 
-      let montoRestado = await db.query(
-        `UPDATE users 
-        SET saldo = '${result[0].saldo - transaction.amount}'
-        WHERE username = '${transactionUsername}'`
-      );
-      // let saldoReceptor = result.saldo
-      // let transaccionUsername = transactionDestiny
-      return {
-        rows,
-        montoRestado
+      if(Math.sign(checkIfNegativeSign) == 1) {
+        return "el numero es negativo"
+      } else {
+        let rows = await db.query(
+          `UPDATE users 
+          SET saldo = '${result2[0].saldo + transaction.amount}'
+          WHERE username = '${transactionDestiny}'`
+        );
+  
+        let montoRestado = await db.query(
+          `UPDATE users 
+          SET saldo = '${result[0].saldo - transaction.amount}'
+          WHERE username = '${transactionUsername}'`
+        );
+  
+        // let saldoReceptor = result.saldo
+        // let transaccionUsername = transactionDestiny
+        return {
+          rows,
+          montoRestado
+        }
       }
+      
 
       // let update1 = await db.query(
       //   `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
