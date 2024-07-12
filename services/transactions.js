@@ -51,23 +51,20 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   } else {
     let transactionUsername = transaction.username
       let transactionDestiny = transaction.destiny
-    let saldoCheck = await db.query(
+    let saldoCheck = db.query(
       `SELECT saldo FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
     ); 
     console.log(saldoCheck);
     console.log(saldoCheck.saldo);
-    // console.log("result[0].saldo");
-    console.log("------------------");
-      // return transaction;
       
       console.log(transaction);
       console.log(transactionUsername);
       console.log(transactionDestiny);
       // return {transactionUsername, transactionDestiny}
-      let result = await db.query(
+      let result =  db.query(
         `SELECT saldo, username FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
       );  
-      let result2 = await db.query(
+      let result2 = db.query(
         `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
       );
       // console.log("result[0].saldo");
@@ -97,6 +94,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
       let status = 0;
       let message = "asdasdasd";
       return {
+        code: 0,
         rows,
         status,
         message
