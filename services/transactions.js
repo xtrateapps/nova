@@ -84,7 +84,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
 
       let montoRestado = await db.query(
         `UPDATE users 
-        SET saldo = '${result2[0].saldo - transaction.amount}'
+        SET saldo = '${result[0].saldo - transaction.amount}'
         WHERE username = '${transactionUsername}'`
       );
       // let saldoReceptor = result.saldo
