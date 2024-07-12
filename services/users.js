@@ -17,7 +17,7 @@ async function getMultiple(page = 1) {
 }
 
 // Registrar nuevo usuario
-async function registerNewUsers(user) {``
+async function registerNewUsers(user) {
   if(user.email == undefined || user.email == "") {
     console.log("email vacio");
     let message = 'Email vacio';
