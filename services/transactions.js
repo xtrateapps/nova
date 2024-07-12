@@ -96,11 +96,9 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
       
       let status = 0;
       let message = "asdasdasd";
-      code = 0
       return {
         rows,
         status,
-        code,
         message
       }
 
