@@ -118,8 +118,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     } 
     
   }
-  
-}
+
 // async function sendDirectFundsFromOneUserToAnother(transaction) {
 //   console.log(result, message, transaction)
 //   return {
