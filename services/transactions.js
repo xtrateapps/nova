@@ -67,6 +67,8 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     console.log(result[0].saldo);
     console.log("transaction.amount");
     console.log("result2[0].saldo + transaction.amount");
+    console.log(result2[0].saldo + transaction.amount);
+    console.log("result2[0].saldo + transaction.amount");
     
     let rows = await db.query(
       `UPDATE users 
