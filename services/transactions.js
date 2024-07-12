@@ -65,9 +65,8 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     console.log(result[0].saldo);
     console.log(result2[0].saldo);
     console.log(transaction.amount);
-    let totalSuma = result2.saldo + transaction.amount
-    let sumax = result2.username
-
+    console.log(result2.saldo + transaction.amount);
+    
     let rows = await db.query(
       `UPDATE users 
       SET saldo = '${transaction.amount}'
