@@ -76,7 +76,8 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     // let transaccionUsername = transactionDestiny
     return {
       rows,
-      sumax
+      result,
+      result2
     }
 
     // let update1 = await db.query(
