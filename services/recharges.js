@@ -152,14 +152,17 @@ async function sendValidatedFunds(user, send_amount) {
     WHERE username = '${userSelected[0].username}'`
   );
   let status = 0
+  let code = 0 
   let message = " asdasdasd"
   if (rows.affectedRows) {
     message = 'lo hizo un monton de verte';
     status = 1  
+    code = 0
     // sendValidatedFunds()
     console.log(message);
   }
   return {
+    userSelectedAmount,
     message, 
     rows,
     status
