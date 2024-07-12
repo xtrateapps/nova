@@ -64,14 +64,14 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     );
     // console.log("result[0].saldo");
     console.log("------------------");
-    console.log(result.saldo);
+    console.log(result[0].saldo);
     console.log("transaction.amount");
     console.log("result2[0].saldo + transaction.amount");
     
     let rows = await db.query(
       `UPDATE users 
       SET saldo = '${transaction.amount}'
-      WHERE username = '${result2.username}'`
+      WHERE username = '${transactionDestiny}'`
     );
     // let saldoReceptor = result.saldo
     // let transaccionUsername = transactionDestiny
