@@ -49,55 +49,63 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   if(transactionUsername == transactionDestiny) {
     return "No puedes enviar dinero al mismo usuario"
   } else {
-    // return transaction;
-    let transactionUsername = transaction.username
-    let transactionDestiny = transaction.destiny
-    console.log(transaction);
-    console.log(transactionUsername);
-    console.log(transactionDestiny);
-    // return {transactionUsername, transactionDestiny}
-    let result = await db.query(
-      `SELECT saldo, username FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
-    );  
-    let result2 = await db.query(
-      `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
-    );
-    // console.log("result[0].saldo");
-    console.log("------------------");
-    console.log(result[0].saldo);
-    console.log("transaction.amount");
-    console.log("result2[0].saldo + transaction.amount");
-    console.log(result2[0].saldo + transaction.amount);
-    console.log("result2[0].saldo + transaction.amount");
-    
-    let rows = await db.query(
-      `UPDATE users 
-      SET saldo = '${result2[0].saldo + transaction.amount}'
-      WHERE username = '${transactionDestiny}'`
-    );
-    // let saldoReceptor = result.saldo
-    // let transaccionUsername = transactionDestiny
-    return {
-      rows
-    }
+    let saldoCheck = await db.query(
+      `SELECT saldo FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
+    ); 
+    if(saldoCheck < transaction.amount) {
+      // return transaction;
+      let transactionUsername = transaction.username
+      let transactionDestiny = transaction.destiny
+      console.log(transaction);
+      console.log(transactionUsername);
+      console.log(transactionDestiny);
+      // return {transactionUsername, transactionDestiny}
+      let result = await db.query(
+        `SELECT saldo, username FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
+      );  
+      let result2 = await db.query(
+        `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
+      );
+      // console.log("result[0].saldo");
+      console.log("------------------");
+      console.log(result[0].saldo);
+      console.log("transaction.amount");
+      console.log("result2[0].saldo + transaction.amount");
+      console.log(result2[0].saldo + transaction.amount);
+      console.log("result2[0].saldo + transaction.amount");
+      
+      let rows = await db.query(
+        `UPDATE users 
+        SET saldo = '${result2[0].saldo + transaction.amount}'
+        WHERE username = '${transactionDestiny}'`
+      );
+      // let saldoReceptor = result.saldo
+      // let transaccionUsername = transactionDestiny
+      return {
+        rows
+      }
 
-    // let update1 = await db.query(
-    //   `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
-    // );
-    // let update2 = await db.query(
-    //   `SELECT saldo, username FROM users WHERE username = '${userToReceiveMoney.username}' LIMIT 1` 
-    // );
-    // let message = 'Datos no encontrados';
-    console.log(result);
-    console.log(message);
-    console.log(transaction);
-    let code = 1
-    if (result.length > 0) {
-      message = 'Datos de usuario';
-      code = 0
-      result = result[0];
-      console.log(result[0]);
+      // let update1 = await db.query(
+      //   `SELECT saldo, username FROM users WHERE username = '${transaction.username}' LIMIT 1` 
+      // );
+      // let update2 = await db.query(
+      //   `SELECT saldo, username FROM users WHERE username = '${userToReceiveMoney.username}' LIMIT 1` 
+      // );
+      // let message = 'Datos no encontrados';
+      console.log(result);
+      console.log(message);
+      console.log(transaction);
+      let code = 1
+      if (result.length > 0) {
+        message = 'Datos de usuario';
+        code = 0
+        result = result[0];
+        console.log(result[0]);
+      }
+    } else {
+      return "Saldo insuficiente"
     }
+    
   }
   
 }
