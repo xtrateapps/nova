@@ -54,6 +54,13 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     ); 
     console.log(saldoCheck);
     console.log(saldoCheck.saldo);
+    // console.log("result[0].saldo");
+    console.log("------------------");
+    console.log(result[0].saldo);
+    console.log("transaction.amount");
+    console.log("result2[0].saldo + transaction.amount");
+    console.log(result2[0].saldo + transaction.amount);
+    console.log("result2[0].saldo + transaction.amount");
     if(saldoCheck[0].saldo < transaction.amount) {
       // return transaction;
       let transactionUsername = transaction.username
@@ -68,13 +75,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
       let result2 = await db.query(
         `SELECT saldo, username FROM users WHERE username = '${transactionDestiny}' LIMIT 1` 
       );
-      // console.log("result[0].saldo");
-      console.log("------------------");
-      console.log(result[0].saldo);
-      console.log("transaction.amount");
-      console.log("result2[0].saldo + transaction.amount");
-      console.log(result2[0].saldo + transaction.amount);
-      console.log("result2[0].saldo + transaction.amount");
+      
       
       let rows = await db.query(
         `UPDATE users 
