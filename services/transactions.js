@@ -93,7 +93,10 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
       
       // let saldoReceptor = result.saldo
       // let transaccionUsername = transactionDestiny
-      let status = 0
+      
+      let status = 0;
+      let message = "asdasdasd";
+      code = 0
       return {
         rows,
         status,
