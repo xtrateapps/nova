@@ -44,7 +44,8 @@ async function registerNewTransaction(transaction) {
 
 async function sendDirectFundsFromOneUserToAnother(transaction) {
   
-
+  let transactionUsername = transaction.username
+  let transactionDestiny = transaction.destiny
   if(transactionUsername == transactionDestiny) {
     return "No puedes enviar dinero al mismo usuario"
   } else {
