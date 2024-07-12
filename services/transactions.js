@@ -56,7 +56,6 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     console.log(saldoCheck.saldo);
     // console.log("result[0].saldo");
     console.log("------------------");
-    if(saldoCheck[0].saldo < transaction.amount) {
       // return transaction;
       let transactionUsername = transaction.username
       let transactionDestiny = transaction.destiny
@@ -115,9 +114,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
         result = result[0];
         console.log(result[0]);
       }
-    } else {
-      return "Saldo insuficiente"
-    }
+
     
   }
   
