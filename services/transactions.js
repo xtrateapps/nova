@@ -47,7 +47,11 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   let transactionUsername = transaction.username
   let transactionDestiny = transaction.destiny
   if(transactionUsername == transactionDestiny) {
-    return "No puedes enviar dinero al mismo usuario"
+    return {
+      code: 2,
+      status: 2,
+      message: "Saldo insuficiente"
+    }
   } else {
     let transactionUsername = transaction.username
       let transactionDestiny = transaction.destiny
@@ -62,7 +66,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     if (parseInt(transaction.amount) > parseInt(saldoChecks[0].saldo )) {
       console.log("inaudixiwnrw");
       return {
-        code: 0,
+        code: 2,
         status: 2,
         message: "Saldo insuficiente"
       }
