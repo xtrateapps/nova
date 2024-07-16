@@ -48,9 +48,9 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
   let transactionDestiny = transaction.destiny
   if(transactionUsername == transactionDestiny) {
     return {
-      code: 2,
-      status: 2,
-      message: "Saldo insuficiente"
+      code: 1,
+      status: 1,
+      message: "No puedes enviarte NOVA a ti mismo"
     }
   } else {
     let transactionUsername = transaction.username
