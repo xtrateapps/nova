@@ -60,7 +60,12 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     ); 
 
     if (parseInt(transaction.amount) > parseInt(saldoChecks[0].saldo )) {
-      console.log("asdasdddddddddddddddddddddddd");
+      console.log("inaudixiwnrw");
+      return {
+        code: 0,
+        status: 2,
+        message: "Saldo insuficiente"
+      }
     } else {
       console.log("------------------");
       console.log(saldoCheck);
@@ -106,12 +111,11 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
         // let transaccionUsername = transactionDestiny
         
         let status = 0;
-        let message = "asdasdasd";
         return {
           code: 0,
           rows,
           status,
-          message
+          message: "Nova Enviado Exitosamente"
         }
 
     }
