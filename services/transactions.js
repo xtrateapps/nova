@@ -9,7 +9,7 @@ async function getMultiple(page = 1){
   );
   const data = helper.emptyOrRows(rows);
   const meta = {page};
-S
+
   return {
     data,
     meta
