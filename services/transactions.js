@@ -65,10 +65,11 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
 
     if (parseInt(transaction.amount) > parseInt(saldoChecks[0].saldo)) {
       console.log("inaudixiwnrw");
+      let message  = "Saldo insuficiente"
       return {
         code: 2,
         status: 2,
-        message: "Saldo insuficiente"
+        message
       }
     } else {
       console.log("------------------");
@@ -116,10 +117,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
         
         let status = 0;
         return {
-          code: 0,
-          rows,
-          status,
-          message: "Nova Enviado Exitosamente"
+          status
         }
 
     }
