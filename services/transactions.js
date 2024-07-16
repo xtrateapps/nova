@@ -50,25 +50,23 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     `SELECT saldo FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
   ); 
   console.log("asdasdasd---------------------------------------");
-  console.log(saldoCheck);
-  if(saldoCheck < transaction.amount) {
-    console.log(saldoCheck);
-  }
-
-  if(transactionUsername == transactionDestiny) {
-    return "No puedes enviar dinero al mismo usuario"
+  console.log(saldoCheck[0].amount);
+  if(saldoCheck[0].amount < transaction.amount) {
+    console.log("saldoCheck");
   } else {
-    let transactionUsername = transaction.username
-    let transactionDestiny = transaction.destiny
-    let saldoCheck = await db.query(
-      `SELECT saldo FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
-    ); 
-    console.log(saldoCheck);
-    console.log(saldoCheck.saldo);
-    // console.log("result[0].saldo");
-    console.log("------------------");
-      // return transaction;
-      
+    if(transactionUsername == transactionDestiny) {
+      return "No puedes enviar dinero al mismo usuario"
+    } else {
+      let transactionUsername = transaction.username
+      let transactionDestiny = transaction.destiny
+      let saldoCheck = await db.query(
+        `SELECT saldo FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
+      ); 
+      console.log(saldoCheck);
+      console.log(saldoCheck.saldo);
+      // console.log("result[0].saldo");
+      console.log("------------------");
+        // return transaction;
       console.log(transaction);
       console.log(transactionUsername);
       console.log(transactionDestiny);
@@ -129,7 +127,10 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
         result = result[0];
         console.log(result[0]);
       }
-    } 
+    }
+  }
+
+   
 
 
 
