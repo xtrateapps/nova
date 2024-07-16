@@ -64,7 +64,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
     }
     console.log("------------------");
     console.log(saldoCheck);
-    console.log(saldoCheck.saldo);
+    console.log(saldoCheck[0].saldo);
     // console.log("result[0].saldo");
     console.log("------------------");
       // return transaction;
