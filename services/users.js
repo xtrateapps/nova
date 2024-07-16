@@ -77,6 +77,9 @@ async function loginUser(user) {
     if (result.length > 0) {
       message = 'Inicio de Sesion Exitoso';
       code = 0
+    } else {
+      message = 'Usuario no existe';
+      code = 1
     }
     console.log(result, message)
     return {
