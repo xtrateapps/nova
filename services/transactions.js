@@ -63,7 +63,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
       `SELECT saldo FROM users WHERE username = '${transactionUsername}' LIMIT 1` 
     ); 
 
-    if (transaction.amount > parseIntsaldoChecks[0].saldo) {
+    if (parseInt(transaction.amount) > parseInt(saldoChecks[0].saldo)) {
       console.log("inaudixiwnrw");
       return {
         code: 2,
