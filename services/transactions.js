@@ -117,7 +117,9 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
         
         let status = 0;
         return {
-          status
+          code: 0,
+          status,
+          message: "Nova Enviado Exitosamente"
         }
 
     }
