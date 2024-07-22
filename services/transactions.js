@@ -106,17 +106,23 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
           WHERE username = '${transactionDestiny}'`
         );
 
-        console.log(rows);
+
+        
   
         let montoRestado = await db.query(
           `UPDATE users 
           SET saldo = '${result[0].saldo - transaction.amount}'
           WHERE username = '${transactionUsername}'`
         );
-        
+        if(rows.changedRows == 1) {
+          console.log("AHORA SI PUEDES REGISTRAR LA TRANSACCCION YA LOS FONDOS SE RESTARON");
+        } else {
+          console.log("Ocurrio un error");
+        }
+        console.log(rows.changedRows);
+        console.log(montoRestado);
         // let saldoReceptor = result.saldo
         // let transaccionUsername = transactionDestiny
-        
         let status = 0;
         return {
           code: 0,

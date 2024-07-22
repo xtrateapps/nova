@@ -81,7 +81,9 @@ async function loginUser(user) {
       message = 'Usuario no existe';
       code = 1
     }
+    console.log("/-------------Login User-------------------------");
     console.log(code, result, message)
+    console.log("/-------------/Login User-------------------------");
     return {
       result,
       message,
