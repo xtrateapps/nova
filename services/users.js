@@ -70,7 +70,7 @@ async function getUserByEmail(user) {
 
 async function loginUser(user) {
     const result = await db.query(
-      `SELECT email, username FROM users WHERE email = '${user.email}' AND password = '${user.password}'` 
+      `SELECT email, username, role_id FROM users WHERE email = '${user.email}' AND password = '${user.password}'` 
     );
     let message = 'Usuario no registrado';
     let code = 1
@@ -81,7 +81,7 @@ async function loginUser(user) {
       message = 'Usuario no existe';
       code = 1
     }
-    console.log(result, message)
+    console.log(code, result, message)
     return {
       result,
       message,
