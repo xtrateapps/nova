@@ -118,13 +118,13 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
         if(rows.changedRows == 1 || montoRestado.changedRows == 1) {
           console.log("AHORA SI PUEDES REGISTRAR LA TRANSACCCION YA LOS FONDOS SE RESTARON");
           console.log("// ------------ Register Internal User Transaction ------------------------- //");
-          let amount = result[0].saldo - transaction.amount
+          let amount = transaction.amount
           let newMadedTransaction = {
-            "reference": "23232",
-            "date": new Date().toDateString,
-            "payment_number": "random unique hash",
-            "bank": "receptor",
-            "account_number": "emisor",
+            "reference": "Title",
+            "date": new Date(),
+            "payment_number": (Math.random() + 1).toString(36).substring(7),
+            "bank": transactionDestiny,
+            "account_number": transactionUsername,
             "amount": amount.toString()
           }
           registerNewTransaction(newMadedTransaction)
