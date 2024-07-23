@@ -17,20 +17,21 @@ async function getMultiple(page = 1){
 }
 
 async function registerNewTransaction(transaction) {
-  // const result = await db.query(
-  //   `INSERT INTO transactions 
-  //   (reference, date, payment_number, bank, account_number, amount) 
-  //   VALUES 
-  //   ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
-  // );
-
+  console.log("un log mas");
   const result = await db.query(
-    `SELECT * FROM transactons WHERE reference = ${transaction.reference}`
-    // `INSERT INTO transactions 
-    // (reference, date, payment_number, bank, account_number, amount) 
-    // VALUES 
-    // ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
+    `INSERT INTO transactions 
+    (reference, date, payment_number, bank, account_number, amount) 
+    VALUES 
+    ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
   );
+
+  // const result = await db.query(
+  //   `SELECT * FROM transactons WHERE reference = ${transaction.reference}`
+  //   // `INSERT INTO transactions 
+  //   // (reference, date, payment_number, bank, account_number, amount) 
+  //   // VALUES 
+  //   // ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
+  // );
 
   let message = 'Error in registering new transaction';
 
@@ -114,21 +115,38 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
           SET saldo = '${result[0].saldo - transaction.amount}'
           WHERE username = '${transactionUsername}'`
         );
-        if(rows.changedRows == 1) {
+        if(rows.changedRows == 1 || montoRestado.changedRows == 1) {
           console.log("AHORA SI PUEDES REGISTRAR LA TRANSACCCION YA LOS FONDOS SE RESTARON");
+          console.log("// ------------ Register Internal User Transaction ------------------------- //");
+          let amount = result[0].saldo - transaction.amount
+          let newMadedTransaction = {
+            "reference": "23232",
+            "date": new Date().toDateString,
+            "payment_number": "random unique hash",
+            "bank": "receptor",
+            "account_number": "emisor",
+            "amount": amount.toString()
+          }
+          registerNewTransaction(newMadedTransaction)
+          return {
+            code: 0,
+            status,
+            message: "Nova Enviado Exitosamente"
+          }
         } else {
           console.log("Ocurrio un error");
+          return {
+            code: 3,
+            status,
+            message: "Ocurrio un error"
+          }
         }
         console.log(rows.changedRows);
         console.log(montoRestado);
         // let saldoReceptor = result.saldo
         // let transaccionUsername = transactionDestiny
         let status = 0;
-        return {
-          code: 0,
-          status,
-          message: "Nova Enviado Exitosamente"
-        }
+        
 
     }
 
