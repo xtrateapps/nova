@@ -120,7 +120,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
           console.log("// ------------ Register Internal User Transaction ------------------------- //");
           let amount = transaction.amount
           let newMadedTransaction = {
-            "reference": "Title",
+            "reference": "New Title",
             "date": new Date(),
             "payment_number": (Math.random() + 1).toString(36).substring(7),
             "bank": transactionDestiny,
