@@ -223,6 +223,6 @@ async function getAllTransactionsrelatedToUser(username) {
 module.exports = {
   getMultiple,
   registerNewTransaction,
-  sendDirectFundsFromOneUserToAnother ,
+  sendDirectFundsFromOneUserToAnother,
   getAllTransactionsrelatedToUser
 }
