@@ -44,7 +44,7 @@ async function registerNewTransaction(transaction) {
 }
 
 async function sendDirectFundsFromOneUserToAnother(transaction) {
-  
+  // 
   let transactionUsername = transaction.username
   let transactionDestiny = transaction.destiny
   if(transactionUsername == transactionDestiny) {
@@ -202,8 +202,27 @@ async function  addNewFundsAterRegisteringNewTransaction(transaction) {
   return {message};
 }
 
+async function getAllTransactionsrelatedToUser(username) {
+  const result = await db.query(`SELECT * FROM users WHERE username = ${username}`)
+  let message = 'Error in getting all transaction related to user';
+  if (result.affectedRows) {
+    message = 'List Succesfully with' + ` ${result.lenght}`;
+  }
+  console.log(result);
+  console.log(username);
+  console.log(message);
+  result.lenght
+  console.log(message);
+  console.log(result.affectedRows);
+  console.log();
+  console.log();
+  console.log();
+  return {message, result};
+}
+
 module.exports = {
   getMultiple,
   registerNewTransaction,
-  sendDirectFundsFromOneUserToAnother 
+  sendDirectFundsFromOneUserToAnother ,
+  getAllTransactionsrelatedToUser
 }
