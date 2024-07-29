@@ -19,6 +19,9 @@ async function getAllRecharges(page = 1) {
 // ---------------------------------------------------------------------------------
 // Validar recarga a traves de numero de refencia, para pago movil / Luego invocar y sumar novas
 async function getAllRechargesByReference(recharge) {
+  // if() {
+
+  // } else {}
   const rows = await db.query(
     `SELECT * FROM recharges WHERE reference = ${recharge.reference}`
   );

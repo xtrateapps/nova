@@ -348,12 +348,12 @@ router.post('`/fine/pay`', (req, res) => {
 router.post('/fine/update', (req, res) =>{
     res.send('multa actualizada')
 })
-router.post('/tx/getAllByUserRefernce', async (req, res) =>{
+router.post('/tx/getAllByUserReference', async (req, res) =>{
     try {
         res.json(await recharges.getAllRechargesByReference(req.body));   
     } catch (err) {
-        console.error(`Error while searching all recharges);
+        console.error(`Error while searching all recharges`);
     }
 })
 
-module.exports = router;
+module.exports = {router}
