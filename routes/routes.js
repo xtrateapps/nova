@@ -356,4 +356,13 @@ router.post('/tx/getAllByUserReference', async (req, res) =>{
     }
 })
 
+router.post('/tx/getAllTransactionsByUserReference', async (req, res) =>{
+    try {
+        res.json(await transactions.getAllTransactionsrelatedToUser(req.body));   
+    } catch (err) {
+        console.error(`Error while searching all recharges`);
+    }
+})
+
+
 module.exports = router

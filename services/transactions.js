@@ -203,6 +203,7 @@ async function  addNewFundsAterRegisteringNewTransaction(transaction) {
 }
 
 async function getAllTransactionsrelatedToUser(bank) {
+  console.log("----------------------------- todas las transacciones ---------------------------------");
   const result = await db.query(`SELECT * FROM transactions WHERE bank = ${bank}`)
   let message = 'Error in getting all transaction related to user';
   if (result.affectedRows) {
