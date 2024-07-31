@@ -202,14 +202,17 @@ async function  addNewFundsAterRegisteringNewTransaction(transaction) {
   return {message};
 }
 
-async function getAllTransactionsrelatedToUser(bank) {
+async function getAllTransactionsrelatedToUser(user) {
+  console.log(user.bank);
   console.log("----------------------------- todas las transacciones -------------------------------sss--");
-  const result = await db.query(`SELECT * FROM transactions WHERE bank = ${bank}`)
-  let message = 'Error in getting all transaction related to user';
-  if (result.affectedRows) {
-    message = 'List Succesfully with' + ` ${result.lenght}`;
+  const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}' AND account_number = '${user.account_number}'`)
+  // let message = 'Error in getting all transaction related to user';
+  console.log(result);
+  if (result.length > 0) {
+    message = 'List Succesfully with' + ` ${result.length} records`;
   }
   return {message, result};
+
 }
 // 04141044264
 module.exports = {
