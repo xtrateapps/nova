@@ -209,9 +209,9 @@ async function getAllTransactionsrelatedToUser(user) {
   const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}'`)
   // let message = 'Error in getting all transaction related to user';
   console.log(result);
-  if (result.length > 0) {
-    message = 'List Succesfully with' + ` ${result.length} records`;
-  }
+  // if (result.length > 0) {
+  //   message = 'List Succesfully with' + ` ${result.length} records`;
+  // }
   return {result};
 
 }
