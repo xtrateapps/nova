@@ -209,14 +209,6 @@ async function getAllTransactionsrelatedToUser(bank) {
   if (result.affectedRows) {
     message = 'List Succesfully with' + ` ${result.lenght}`;
   }
-  console.log(result);
-  console.log();
-  console.log(bank);
-  console.log(message);
-  console.log(bank);
-  console.log();
-  console.log();
-  console.log();
   return {message, result};
 }
 // 04141044264
