@@ -213,8 +213,8 @@ async function getAllTransactionsrelatedToUser(user) {
   // if (result.length > 0) {
   //   message = 'List Succesfully with' + ` ${result.length} records`;
   // }
-  var rows = result;
-  return {rows, message};
+  var data = result;
+  return {data, message};
 
 }
 // 04141044264
