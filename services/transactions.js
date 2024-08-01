@@ -208,12 +208,13 @@ async function getAllTransactionsrelatedToUser(user) {
   // const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}' AND account_number = '${user.account_number}'`)
   const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}'`)
   // let message = 'Error in getting all transaction related to user';
-  console.log(result[0]);
+  console.log(result);
+  let message = "exito"
   // if (result.length > 0) {
   //   message = 'List Succesfully with' + ` ${result.length} records`;
   // }
-  var red = result[0]
-  return {red};
+  var rows = result
+  return {rows, message};
 
 }
 // 04141044264
