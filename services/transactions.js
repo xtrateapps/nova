@@ -130,14 +130,14 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
           registerNewTransaction(newMadedTransaction)
           return {
             code: 0,
-            status,
+            status: 0,
             message: "Nova Enviado Exitosamente"
           }
         } else {
           console.log("Ocurrio un error");
           return {
             code: 3,
-            status,
+            status: 3,
             message: "Ocurrio un error"
           }
         }
