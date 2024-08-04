@@ -20,9 +20,9 @@ async function registerNewTransaction(transaction) {
   console.log("un log mas");
   const result = await db.query(
     `INSERT INTO transactions 
-    (reference, date, payment_number, bank, account_number, amount) 
+    (reference, date, payment_number, bank, account_number, amount, user) 
     VALUES 
-    ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}')`
+    ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}', '${transaction.user}')`
   );
 
   // const result = await db.query(
@@ -125,7 +125,8 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
             "payment_number": (Math.random() + 1).toString(36).substring(7),
             "bank": transactionDestiny,
             "account_number": transactionUsername,
-            "amount": amount.toString()
+            "amount": amount.toString(),
+            "user": transactionUsername
           }
           registerNewTransaction(newMadedTransaction)
           return {
@@ -206,7 +207,7 @@ async function getAllTransactionsrelatedToUser(user) {
   console.log(user.bank);
   console.log("----------------------------- todas las transacciones -------------------------------sss--");
   // const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}' AND account_number = '${user.account_number}'`)
-  const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}'`);
+  const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}' AND user = ${user.bank}`);
   // let message = 'Error in getting all transaction related to user';
   console.log(result);
   let message = "exito";
