@@ -20,9 +20,9 @@ async function registerNewTransaction(transaction) {
   console.log("un log mas");
   const result = await db.query(
     `INSERT INTO transactions 
-    (reference, date, payment_number, bank, account_number, amount, user) 
+    (reference, date, payment_number, bank, account_number, amount, user_logged) 
     VALUES 
-    ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}', '${transaction.user}')`
+    ('${transaction.reference}', '${transaction.date}', '${transaction.payment_number}', '${transaction.bank}', '${transaction.account_number}', '${transaction.amount}', '${transaction.user_logged}')`
   );
 
   // const result = await db.query(
