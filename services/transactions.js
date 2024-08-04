@@ -126,7 +126,7 @@ async function sendDirectFundsFromOneUserToAnother(transaction) {
             "bank": transactionDestiny,
             "account_number": transactionUsername,
             "amount": amount.toString(),
-            "user": transactionUsername
+            "user_logged": transactionUsername
           }
           registerNewTransaction(newMadedTransaction)
           return {
@@ -207,13 +207,13 @@ async function getAllTransactionsrelatedToUser(user) {
   console.log(user.bank);
   console.log("----------------------------- todas las transacciones -------------------------------sss--");
   // const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}' AND account_number = '${user.account_number}'`)
-  const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}' AND user = ${user.bank}`);
+  const result = await db.query(`SELECT * FROM transactions WHERE bank = '${user.bank}' AND user_logged = ${user.bank}`);
   // let message = 'Error in getting all transaction related to user';
   console.log(result);
   let message = "exito";
   // if (result.length > 0) {
   //   message = 'List Succesfully with' + ` ${result.length} records`;
-  // }
+  // }`
   var data = result;
   return {data, message};
 
