@@ -1,16 +1,36 @@
 // --------------------- NOVA ------------------------------ //
 const express = require("express");
 const router = express.Router();
+const multer  = require('multer')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/profile')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    //   cb(null, file.originalname + '-' + Date.now())
+    }
+  })
+  
+const upload = multer({ storage: storage })
+// const upload = require("../services/fileupload.js");
 // Transaciones - Recargas
 // Enviar Transaccion
 // ----------------- Servicios ---------------------------------
 const transactions = require('../services/transactions');
 const recharges = require('../services/recharges');
 const users =  require('../services/users');
-// ----------------- Modelos -----------------------------------
+// ----------------- Modelos ---------------------------c--------
 const transactionModel = require('../model/transactions');
 const userModel = require('../model/user.js');
 // Routes - con su funcionalidad lista
+// --------------------  Cambiar Foto  -------------------------
+router.post('/user/profile/change-photo', upload.single('avatar'), (req, res, next) => {
+    res.json(req.file); 
+    console.log(req.file, req.body)
+    // req.file es el archivo del `avatar`
+  // req.body contendrá los campos de texto, si los hubiera.
+});
 // Registrar nuevo usuario
 router.post('/register/new-user', async (req, res) => {
     try {
@@ -363,6 +383,11 @@ router.post('/tx/getAllTransactionsByUserReference', async (req, res) =>{
         console.error(`Error while searching all recharges`);
     }
 })
+
+
+
+
+//Rutas Fetch
 
 
 module.exports = router

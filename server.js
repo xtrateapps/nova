@@ -3,6 +3,12 @@ require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const waves = require("./services/waves.js");
+
+// Aja waves v
+console.log("aja waves");
+console.log(waves);
+
 // // Mongo DB Database Part
 // const mongoose = require("mongoose");
 // const mongoString = process.env.DATABASE_URL
